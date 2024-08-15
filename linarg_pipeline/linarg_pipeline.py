@@ -30,7 +30,7 @@ with open(f'{args.data_identifier}.txt', 'r') as f:
         alts.append(items[4])
 
 chrom = args.data_identifier.split('_')[1].split('chr')[1].split(':')[0]
-linarg.write(f'/linear_args/adjacency_matrices/{args.data_identifier}', chrom, positions, refs, alts)
+linarg.write(f'linear_args/adjacency_matrices/{args.data_identifier}', chrom, positions, refs, alts)
 
 end = time.time()
 
