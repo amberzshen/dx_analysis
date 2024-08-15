@@ -20,12 +20,13 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     ploidy = 1 if phased else 2
     
     variant_metadata_path = f'genotype_matrices/variant_metadata/{out_prefix}_{region}.txt'
+    
     with open(variant_metadata_path, 'w') as f:
         f.write("##fileformat=PVARv1.0\n")
         f.write("##INFO=<ID=IDX,Number=1,Type=Integer,Description=\"Variant Index\">\n")
         f.write("##INFO=<ID=FLIP,Number=1,Type=Integer,Description=\"Flip Information\">\n")
         f.write("#CHROM POS ID REF ALT INFO\n")
-
+    f = open(variant_metadata_path, 'a')
     # TODO: handle missing data
     for var in vcf(region):
         if phased:
@@ -43,12 +44,10 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
         (idx,) = np.where(gts != 0)
         data.append(gts[idx])
         idxs.append(idx)
-        ptrs.append(ptrs[-1] + len(idx))
-        var_metadata.append(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={len(var_metadata)};FLIP={int(flip)}']))
-        
-        f = open(variant_metadata_path, 'a')
+        ptrs.append(ptrs[-1] + len(idx))    
         f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={len(var_metadata)};FLIP={int(flip)}'])+'\n')
-        f.close()
+    
+    f.close()
         
     data = np.concatenate(data)
     idxs = np.concatenate(idxs)
