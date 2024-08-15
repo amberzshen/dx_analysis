@@ -2,9 +2,8 @@
 
 set -euo pipefail
 
-chrom=$1
-region=$2
-out_prefix=$3
+region=$1
+out_prefix=$2
 
 # vcf_file="/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c${chrom}_b0_v1.vcf.gz"
 
