@@ -9,7 +9,6 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     Codes phased genotypes as 0/1, and there are 2n rows, where rows 2*k and 2*k+1 correspond to individual k.
     """
     chrom = region.split('chr')[1].split(':')[0]
-    # chrom = region.split(':')[0]
     vcf_file=f'/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c{chrom}_b0_v1.vcf.gz'
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
     data = []
@@ -20,13 +19,13 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     ploidy = 1 if phased else 2
     
     variant_metadata_path = f'genotype_matrices/variant_metadata/{out_prefix}_{region}.txt'
-    
     with open(variant_metadata_path, 'w') as f:
         f.write("##fileformat=PVARv1.0\n")
         f.write("##INFO=<ID=IDX,Number=1,Type=Integer,Description=\"Variant Index\">\n")
         f.write("##INFO=<ID=FLIP,Number=1,Type=Integer,Description=\"Flip Information\">\n")
         f.write("#CHROM POS ID REF ALT INFO\n")
     f = open(variant_metadata_path, 'a')
+    var_index = 0
     # TODO: handle missing data
     for var in vcf(region):
         if phased:
@@ -45,7 +44,8 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
         data.append(gts[idx])
         idxs.append(idx)
         ptrs.append(ptrs[-1] + len(idx))    
-        f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={len(var_metadata)};FLIP={int(flip)}'])+'\n')
+        f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
+        var_index += 1
     
     f.close()
         
