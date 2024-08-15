@@ -36,7 +36,7 @@ end = time.time()
 
 runtime = end - start
 nnz_ratio = np.sum(n * np.minimum(af, 1-af)) / linarg.nnz
-stats = [args.data_identifier, n, m, runtime, nnz_ratio]
+stats = [args.data_identifier, str(n), str(m), str(runtime), str(nnz_ratio)]
 
 with open(f'linear_args/statistics/{args.data_identifier}.txt', 'w') as file:
     file.write("\t".join(stats))
