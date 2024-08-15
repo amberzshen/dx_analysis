@@ -65,6 +65,6 @@ if __name__ == "__main__":
     parser.add_argument('out_prefix', type=str)
     args = parser.parse_args()
     
-    vcf_to_csc(args.chrom, args.region, args.out_prefix, phased=True, flip_minor_alleles=False)
+    vcf_to_csc(args.region, args.out_prefix, phased=True, flip_minor_alleles=False)
     
 
