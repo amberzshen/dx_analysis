@@ -18,7 +18,7 @@ incl = (af > 0) * (af < 1)
 genotypes = sparse_matrix[:, incl == 1]
 linarg = ld.LinearARG.from_genotypes(genotypes)
 
-with open(f'{args.data_identifier}.txt', 'r') as f
+with open(f'{args.data_identifier}.txt', 'r') as f:
     lines = f.readlines()[4:] # skip header lines
     positions = []
     refs = []
