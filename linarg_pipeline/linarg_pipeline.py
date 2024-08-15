@@ -18,9 +18,19 @@ incl = (af > 0) * (af < 1)
 genotypes = sparse_matrix[:, incl == 1]
 linarg = ld.LinearARG.from_genotypes(genotypes)
 
-# the following need to be fixed to match new function
-# need to open variant metadata and skip first few lines
-linarg.write(f'/linear_args/adjacency_matrices/{args.data_identifier}')
+with open(f'{args.data_identifier}.txt', 'r') as f
+    lines = f.readlines()[4:] # skip header lines
+    positions = []
+    refs = []
+    alts = []
+    for line in lines:
+        items = line.split()
+        positions.append(items[1])
+        refs.append(items[3])
+        alts.append(items[4])
+
+chrom = args.data_identifier.split('_')[1].split('chr')[1].split(':')[0]
+linarg.write(f'/linear_args/adjacency_matrices/{args.data_identifier}', chrom, positions, refs, alts)
 
 end = time.time()
 
