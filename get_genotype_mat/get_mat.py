@@ -52,7 +52,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     data = np.concatenate(data)
     idxs = np.concatenate(idxs)
     ptrs = np.array(ptrs)
-    genotypes = scipy.sparse.csc_matrix((data, idxs, ptrs))
+    genotypes = scipy.sparse.csc_matrix((data, idxs, ptrs)) # this step is taking up a lot of memory, maybe we can construct the csc one element at a time?
     
     scipy.sparse.save_npz(f'genotype_matrices/matrices/{out_prefix}_{region}.npz', genotypes)
 
