@@ -55,6 +55,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
         var_index += 1
     
     f.close()    
+    genotype_mat = genotype_mat.tocsr()
     scipy.sparse.save_npz(f'genotype_matrices/matrices/{out_prefix}_{region}.npz', genotype_mat)
 
 
