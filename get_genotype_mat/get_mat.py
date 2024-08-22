@@ -12,11 +12,11 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     vcf_file=f'/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c{chrom}_b0_v1.vcf.gz'
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
     vcf_region = vcf(region)
-    flip = False
+    
+    n_samples = len(vcf_region.samples)    
+    genotype_mat = scipy.sparse.coo_matrix((n_samples, 0))
     
     ploidy = 1 if phased else 2
-    
-    genotype_mat = scipy.sparse.coo_matrix((n_samples, 0))
     
     variant_metadata_path = f'genotype_matrices/variant_metadata/{out_prefix}_{region}.txt'
     with open(variant_metadata_path, 'w') as f:
