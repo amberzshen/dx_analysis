@@ -3,6 +3,7 @@ import numpy as np
 import scipy.sparse
 import argparse
 
+# this probably has some bugs since the disk size of the matrix is not the same using the old approach.
 def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_alleles: bool = True):
     """
     Codes unphased genotypes as 0/1/2/3, where 3 means that at least one of the two alleles is unknown.
@@ -11,9 +12,13 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     chrom = region.split('chr')[1].split(':')[0]
     vcf_file=f'/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c{chrom}_b0_v1.vcf.gz'
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
-    data = []
-    idxs = []
-    ptrs = [0]
+    vcf_region = vcf(region)
+    
+    if phased:
+        n_samples = 2*len(vcf.samples)  
+    else:
+        n_samples = len(vcf.samples)  
+    genotype_mat = scipy.sparse.coo_matrix((n_samples, 0))
     flip = False
     
     ploidy = 1 if phased else 2
@@ -27,7 +32,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     f = open(variant_metadata_path, 'a')
     var_index = 0
     # TODO: handle missing data
-    for var in vcf(region):
+    for var in vcf_region:
         if phased:
             gts = np.ravel(np.asarray(var.genotype.array())[:, :2])
         else:
@@ -39,22 +44,20 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
                 flip = True
             else:
                 flip = False
-
+                
         (idx,) = np.where(gts != 0)
-        data.append(gts[idx])
-        idxs.append(idx)
-        ptrs.append(ptrs[-1] + len(idx))    
+        data = gts[idx]
+        row = idx
+        col = np.zeros(len(data))
+        genotype_mat_var = scipy.sparse.coo_matrix((data, (row, col)), shape=(n_samples, 1))
+        genotype_mat = scipy.sparse.hstack([genotype_mat, genotype_mat_var])    
+        
         f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
         var_index += 1
     
-    f.close()
-        
-    data = np.concatenate(data)
-    idxs = np.concatenate(idxs)
-    ptrs = np.array(ptrs)
-    genotypes = scipy.sparse.csc_matrix((data, idxs, ptrs)) # this step is taking up a lot of memory, maybe we can construct the csc one element at a time?
-    
-    scipy.sparse.save_npz(f'genotype_matrices/matrices/{out_prefix}_{region}.npz', genotypes)
+    f.close()    
+    genotype_mat = genotype_mat.tocsr()
+    scipy.sparse.save_npz(f'genotype_matrices/matrices/{out_prefix}_{region}.npz', genotype_mat)
 
 
 
