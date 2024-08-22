@@ -13,8 +13,9 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
     vcf_region = vcf(region)
     
-    n_samples = len(vcf_region.samples)    
+    n_samples = len(vcf.samples)    
     genotype_mat = scipy.sparse.coo_matrix((n_samples, 0))
+    flip = False
     
     ploidy = 1 if phased else 2
     
@@ -45,7 +46,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
         row = idx
         col = np.zeros(len(data))
         genotype_mat_var = scipy.sparse.coo_matrix((data, (row, col)), shape=(n_samples, 1))
-        genotype_mat = scipy.sparse.hstack([genotype_mat, genotyp_mat_var])    
+        genotype_mat = scipy.sparse.hstack([genotype_mat, genotype_mat_var])    
         
         f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
         var_index += 1
