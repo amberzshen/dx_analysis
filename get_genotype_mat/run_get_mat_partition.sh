@@ -10,4 +10,4 @@ mkdir -p variant_metadata
 
 pip install --upgrade scipy
 pip install cyvcf2
-python3 get_mat.py $region $out_prefix
+python3 get_mat_partition.py $region $out_prefix
