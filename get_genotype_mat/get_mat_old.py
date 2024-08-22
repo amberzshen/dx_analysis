@@ -11,12 +11,12 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     chrom = region.split('chr')[1].split(':')[0]
     vcf_file=f'/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c{chrom}_b0_v1.vcf.gz'
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
-    vcf_region = vcf(region)
+    data = []
+    idxs = []
+    ptrs = [0]
     flip = False
     
     ploidy = 1 if phased else 2
-    
-    genotype_mat = scipy.sparse.coo_matrix((n_samples, 0))
     
     variant_metadata_path = f'genotype_matrices/variant_metadata/{out_prefix}_{region}.txt'
     with open(variant_metadata_path, 'w') as f:
@@ -27,7 +27,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     f = open(variant_metadata_path, 'a')
     var_index = 0
     # TODO: handle missing data
-    for var in vcf_region:
+    for var in vcf(region):
         if phased:
             gts = np.ravel(np.asarray(var.genotype.array())[:, :2])
         else:
@@ -39,19 +39,22 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
                 flip = True
             else:
                 flip = False
-                
+
         (idx,) = np.where(gts != 0)
-        data = gts[idx]
-        row = idx
-        col = np.zeros(len(data))
-        genotype_mat_var = scipy.sparse.coo_matrix((data, (row, col)), shape=(n_samples, 1))
-        genotype_mat = scipy.sparse.hstack([genotype_mat, genotyp_mat_var])    
-        
+        data.append(gts[idx])
+        idxs.append(idx)
+        ptrs.append(ptrs[-1] + len(idx))    
         f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
         var_index += 1
     
-    f.close()    
-    scipy.sparse.save_npz(f'genotype_matrices/matrices/{out_prefix}_{region}.npz', genotype_mat)
+    f.close()
+        
+    data = np.concatenate(data)
+    idxs = np.concatenate(idxs)
+    ptrs = np.array(ptrs)
+    genotypes = scipy.sparse.csc_matrix((data, idxs, ptrs)) # this step is taking up a lot of memory, maybe we can construct the csc one element at a time?
+    
+    scipy.sparse.save_npz(f'genotype_matrices/matrices/{out_prefix}_{region}.npz', genotypes)
 
 
 
