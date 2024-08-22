@@ -13,7 +13,10 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
     vcf_region = vcf(region)
     
-    n_samples = len(vcf.samples)    
+    if phased:
+        n_samples = 2*len(vcf.samples)  
+    else:
+        n_samples = len(vcf.samples)  
     genotype_mat = scipy.sparse.coo_matrix((n_samples, 0))
     flip = False
     
