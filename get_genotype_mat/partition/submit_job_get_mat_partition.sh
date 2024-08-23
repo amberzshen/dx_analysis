@@ -23,8 +23,8 @@ for i in $(seq 0 $n_partitions); do
   echo $partition_region
 
   dx run app-swiss-army-knife \
-      -iin="/amber/scripts/get_genotype_mat/run_get_mat_partition.sh" \
-      -iin="amber/scripts/get_genotype_mat/get_mat_partition.py" \
+      -iin="/amber/scripts/run_get_mat_partition.sh" \
+      -iin="amber/scripts/get_mat_partition.py" \
       -icmd="bash run_get_mat_partition.sh $partition_region $i" \
       --destination "/linear_arg_results/${out_prefix}_${chr}\:${r}/" \
       --instance-type $instance_type \
