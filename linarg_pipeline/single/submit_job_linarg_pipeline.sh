@@ -10,7 +10,7 @@ dx run app-swiss-army-knife \
     -iin="/genotype_matrices/variant_metadata/${data_identifier}.txt" \
     -icmd="bash run_linarg_pipeline.sh $data_identifier" \
     --destination "/" \
-    --instance-type "mem3_ssd1_v2_x16" \
-    --priority high \
-    --name run_linarg_pipeline_test \
+    --instance-type "mem3_ssd1_v2_x8" \
+    --priority low \
+    --name linarg_chr1-500kb-test \
     -y

@@ -2,15 +2,15 @@
 region=$1
 out_prefix=$2
 partition_size=$3
+instance_type=$4
 
 chr=$(echo "$region" | awk -F: '{print $1}')
 r=$(echo "$region" | awk -F: '{print $2}')
 start=$(echo "$r" | awk -F- '{print $1}')
 end=$(echo "$r" | awk -F- '{print $2}')
 
-# dx mkdir -p "/genotype_matrices/${out_prefix}_${chr}\:${r}/"
+dx mkdir -p "/linear_arg_results/${out_prefix}_${chr}\:${r}/"
 
-# convert to integers
 integer=$((start))
 integer=$((end))
 
@@ -22,13 +22,13 @@ for i in $(seq 0 $n_partitions); do
   partition_region="$chr:$partition_start-$partition_end"
   echo $partition_region
 
-  # dx run app-swiss-army-knife \
-  #     -iin="/amber/scripts/get_genotype_mat/run_get_mat_partition.sh" \
-  #     -iin="amber/scripts/get_genotype_mat/get_mat_partition.py" \
-  #     -icmd="bash run_get_mat_partition.sh $partition_region $out_prefix" \
-  #     --destination "/genotype_matrices/${out_prefix}_${chr}\:${r}/" \
-  #     --instance-type "mem1_ssd1_v2_x4" \
-  #     --priority low \
-  #     --name get_mat_test \
-  #     -y
+  dx run app-swiss-army-knife \
+      -iin="/amber/scripts/get_genotype_mat/run_get_mat_partition.sh" \
+      -iin="amber/scripts/get_genotype_mat/get_mat_partition.py" \
+      -icmd="bash run_get_mat_partition.sh $partition_region $i" \
+      --destination "/linear_arg_results/${out_prefix}_${chr}\:${r}/" \
+      --instance-type $instance_type \
+      --priority low \
+      --name "get_mat_${out_prefix}_${region}_${i}_${partition_region}" \
+      -y
 done

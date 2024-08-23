@@ -5,7 +5,7 @@ set -euo pipefail
 region=$1
 out_prefix=$2
 
-mkdir -p matrices
+mkdir -p genotype_matrices
 mkdir -p variant_metadata
 
 pip install --upgrade scipy
