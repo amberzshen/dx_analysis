@@ -9,7 +9,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     Codes phased genotypes as 0/1, and there are 2n rows, where rows 2*k and 2*k+1 correspond to individual k.
     """
     chrom = region.split('chr')[1].split('-')[0]
-    region_formatted = f'{region.split('-')[0]}:{region.split('-')[1]}-{region.split('-')[2]}'
+    region_formatted = f'{region.split("-")[0]}:{region.split("-")[1]}-{region.split("-")[2]}'
     vcf_file=f'/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c{chrom}_b0_v1.vcf.gz'
     vcf = VCF(vcf_file, gts012=True, strict_gt=True)
     data = []

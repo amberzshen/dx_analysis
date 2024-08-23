@@ -4,12 +4,11 @@ out_prefix=$2
 partition_size=$3
 instance_type=$4
 
-chr=$(echo "$region" | awk -F: '{print $1}')
-r=$(echo "$region" | awk -F: '{print $2}')
-start=$(echo "$r" | awk -F- '{print $1}')
-end=$(echo "$r" | awk -F- '{print $2}')
+chr=$(echo "$region" | awk -F- '{print $1}')
+start=$(echo "$region" | awk -F- '{print $2}')
+end=$(echo "$region" | awk -F- '{print $3}')
 
-dx mkdir -p "/linear_arg_results/${out_prefix}_${chr}\:${r}/"
+dx mkdir -p "/linear_arg_results/${out_prefix}_${region}/"
 
 integer=$((start))
 integer=$((end))
@@ -26,7 +25,7 @@ for i in $(seq 0 $n_partitions); do
       -iin="/amber/scripts/run_get_mat_partition.sh" \
       -iin="amber/scripts/get_mat_partition.py" \
       -icmd="bash run_get_mat_partition.sh $partition_region $i" \
-      --destination "/linear_arg_results/${out_prefix}_${chr}\:${r}/" \
+      --destination "/linear_arg_results/${out_prefix}_${region}/" \
       --instance-type $instance_type \
       --priority low \
       --name "get_mat_${out_prefix}_${region}_${i}_${partition_region}" \
