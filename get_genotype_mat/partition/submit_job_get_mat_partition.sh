@@ -1,5 +1,5 @@
 #!/bin/bash
-region=$1
+region=$1 # should be in the form: chrA-B-C
 out_prefix=$2
 partition_size=$3
 instance_type=$4
@@ -19,7 +19,7 @@ n_partitions=$(echo "scale=0; (($end - $start + 1) + $parition_size - 1) / $part
 for i in $(seq 0 $n_partitions); do
   partition_start=$(($start + i*$partition_size))
   partition_end=$(printf "%d\n%d" $(($partition_start + $partition_size - 1)) $end | sort -n | head -n1) # region is inclusive
-  partition_region="$chr:$partition_start-$partition_end"
+  partition_region="$chr-$partition_start-$partition_end"
   echo $partition_region
 
   dx run app-swiss-army-knife \
