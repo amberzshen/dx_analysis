@@ -2,7 +2,6 @@ import linear_dag as ld
 import numpy as np
 import scipy.sparse
 import argparse
-import pickle as pkl
 import time
 
 start = time.time()
@@ -21,9 +20,12 @@ genotypes = sparse_matrix[:, incl == 1]
 brick_graph, samples_idx, variants_idx = ld.BrickGraph.from_genotypes(genotypes)
 recom = ld.Recombination.from_graph(brick_graph)
 recom.find_recombinations()
+adj_mat = recom.to_csr()
 
-with open(f'linear_arg_partitions/{args.data_identifier}.pkl', 'wb') as f:
-    pickle.dump([recom, samples_idx, variants_idx], f)
+np.savez(f'linear_arg_partitions/{args.data_identifier}.npz',
+        brick_graph_adj_mat=recom.to_csr(),
+        sample_indices=np.array(samples_idx),
+        variant_indices=np.array(variants_idx))
 
 end = time.time()
 
