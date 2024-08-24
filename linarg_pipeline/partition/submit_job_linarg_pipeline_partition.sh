@@ -10,7 +10,7 @@ do
     dx run app-swiss-army-knife \
         -iin="/amber/scripts/run_linarg_pipeline_partition.sh" \
         -iin="amber/scripts/linarg_pipeline_partition.py" \
-        -iin="/linear_arg_results/genotype_matrices/${partition_identifier}.npz" \
+        -iin="/linear_arg_results/${data_identifier}/genotype_matrices/${partition_identifier}.npz" \
         -icmd="bash run_linarg_pipeline.sh $partition_identifier" \
         --destination "/" \
         --instance-type $instance_type \
