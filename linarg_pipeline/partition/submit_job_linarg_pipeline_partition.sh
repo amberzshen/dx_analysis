@@ -16,6 +16,7 @@ do
         --instance-type $instance_type \
         --priority low \
         --name "linarg_${data_identifier}_${partition_identifier}" \
-        -y \
-	    --brief
+        --brief \
+        -y
+    exit
 done
