@@ -12,11 +12,10 @@ do
         -iin="amber/scripts/linarg_pipeline_partition.py" \
         -iin="/linear_arg_results/${data_identifier}/genotype_matrices/${f}" \
         -icmd="bash run_linarg_pipeline_partition.sh $partition_identifier" \
-        --destination "/" \
+        --destination "/linear_arg_results/${data_identifier}/" \
         --instance-type $instance_type \
         --priority low \
         --name "linarg_${data_identifier}_${partition_identifier}" \
         --brief \
         -y
-    exit
 done

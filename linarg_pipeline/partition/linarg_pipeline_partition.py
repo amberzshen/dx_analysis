@@ -23,7 +23,10 @@ recom.find_recombinations()
 adj_mat = recom.to_csr()
 
 np.savez(f'linear_arg_partitions/{args.data_identifier}.npz',
-        brick_graph_adj_mat=recom.to_csr(),
+        brick_graph_data=adj_mat.data,
+        brick_graph_indices=adj_mat.indices,
+        brick_graph_indptr=adj_mat.indptr,
+        brick_graph_shape=adj_mat.shape,
         sample_indices=np.array(samples_idx),
         variant_indices=np.array(variants_idx))
 
@@ -35,5 +38,5 @@ nnz_ratio = geno_nnz / adj_mat.nnz
 stats = [args.data_identifier, str(n), str(m), str(runtime), str(geno_nnz), str(adj_mat.nnz), str(nnz_ratio)]
 
 with open(f'linear_arg_partition_stats/{args.data_identifier}.txt', 'w') as file:
-    file.write("\t".join(['data_identifier', 'n', 'm', 'runtime', 'geno_nnz', 'brickgraph_nnz', 'nnz_ratio']))
-    file.write("\t".join(stats))
+    file.write("\t".join(['data_identifier', 'n', 'm', 'runtime', 'geno_nnz', 'brickgraph_nnz', 'nnz_ratio'])+'\n')
+    file.write("\t".join(stats)+'\n')
