@@ -31,7 +31,7 @@ for var_meta in files:
             refs.append(items[3])
             alts.append(items[4])
 
-chrom = args.data_identifier.split('_')[1].split('chr')[1].split(':')[0]
+chrom = args.data_identifier.split('_')[1].split('chr')[1].split('-')[0]
 linarg.write(f'{args.data_identifier}/linear_arg', chrom, positions, refs, alts.
              sample_filename=f'{args.data_identifier}/linear_arg')
 
