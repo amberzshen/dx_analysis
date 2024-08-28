@@ -9,7 +9,6 @@ def get_partitions(vcf_path, region, window_size):
     region_formatted = f'{region.split("-")[0]}:{region.split("-")[1]}-{region.split("-")[2]}'
 
     vcf = VCF(vcf_path)
-
     positions = []
     for variant in vcf(region_formatted):
         positions.append(variant.POS)
@@ -18,7 +17,6 @@ def get_partitions(vcf_path, region, window_size):
     partition_starts = []
     partition_ends = []
     n_variants = []
-
     while len(positions) > 0:
         if len(positions) >= window_size:
             end = positions[window_size-1]

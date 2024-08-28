@@ -12,6 +12,6 @@ dx run app-swiss-army-knife \
     -icmd="bash run_get_partitions.sh $region $window_size" \
     --destination "/linear_arg_results/${out_prefix}_${region}/" \
     --instance-type $instance_type \
-    --priority low \
+    --priority high \
     --name "get_partition_${out_prefix}_${region}" \
     -y

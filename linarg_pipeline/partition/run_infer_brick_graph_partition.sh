@@ -1,5 +1,5 @@
 #!/bin/bash
-data_identifier=$1
+partition_identifier=$1
 
 # download python 3.9 and cython complier dependencies
 sudo apt-get update
@@ -13,7 +13,7 @@ python3.9 -m pip install dxpy # for dna_nexus.py
 python3.9 -m pip install pyspark # for dna_nexus.py
 python3.9 -m pip install git+https://github.com/quattro/linear-dag.git@amber_debug
 
-mkdir -p linear_arg_partitions
-mkdir -p linear_arg_partition_stats
+mkdir -p brick_graph_partitions
+mkdir -p brick_graph_partition_stats
 
-python3.9 linarg_pipeline_partition.py $data_identifier
+python3.9 infer_brick_graph_partition.py $partition_identifier

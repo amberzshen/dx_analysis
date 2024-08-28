@@ -8,14 +8,14 @@ do
     echo $f
     partition_identifier=$(echo "$f" | awk -F. '{print $1}')
     dx run app-swiss-army-knife \
-        -iin="/amber/scripts/run_linarg_pipeline_partition.sh" \
-        -iin="amber/scripts/linarg_pipeline_partition.py" \
+        -iin="/amber/scripts/run_infer_brick_graph_partition.sh" \
+        -iin="amber/scripts/infer_brick_graph_partition.py" \
         -iin="/linear_arg_results/${data_identifier}/genotype_matrices/${f}" \
-        -icmd="bash run_linarg_pipeline_partition.sh $partition_identifier" \
+        -icmd="bash run_infer_brick_graph_partition.sh $partition_identifier" \
         --destination "/linear_arg_results/${data_identifier}/" \
         --instance-type $instance_type \
         --priority low \
-        --name "linarg_${data_identifier}_${partition_identifier}" \
+        --name "brick_graph_${data_identifier}_${partition_identifier}" \
         --brief \
         -y
 done
