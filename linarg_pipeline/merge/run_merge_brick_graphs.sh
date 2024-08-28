@@ -13,7 +13,6 @@ python3.9 -m pip install dxpy # for dna_nexus.py
 python3.9 -m pip install pyspark # for dna_nexus.py
 python3.9 -m pip install git+https://github.com/quattro/linear-dag.git@amber_debug
 
-mkdir -p linear_arg_partitions
-mkdir -p linear_arg_partition_stats
+mkdir -p $data_identifier
 
 python3.9 merge_brick_graphs.py $data_identifier

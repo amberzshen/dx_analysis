@@ -2,6 +2,7 @@ import linear_dag as ld
 from linear_dag.brick_graph import merge_brick_graphs
 from linear_dag.one_summed_cy import linearize_brick_graph
 import argparse
+import numpy as np
 import os
 
 parser = argparse.ArgumentParser()
@@ -31,7 +32,10 @@ for var_meta in files:
             refs.append(items[3])
             alts.append(items[4])
 
+print(len(positions))
+print(linarg.shape)
+
 chrom = args.data_identifier.split('_')[1].split('chr')[1].split('-')[0]
-linarg.write(f'{args.data_identifier}/linear_arg', chrom, positions, refs, alts.
+linarg.write(f'{args.data_identifier}/linear_arg', chrom, positions, refs, alts,
              sample_filename=f'{args.data_identifier}/linear_arg')
 
