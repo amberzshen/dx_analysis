@@ -1,4 +1,4 @@
-import cyvcf2 as VCF
+from cyvcf2 import VCF
 import numpy as np
 import argparse
 
@@ -42,10 +42,10 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser()
     parser.add_argument('region', type=str)
-    parser.add_argument('window_size', type=str)
+    parser.add_argument('window_size', type=int)
     args = parser.parse_args()
     
-    chrom = region.split('chr')[1].split('-')[0]
+    chrom = args.region.split('chr')[1].split('-')[0]
     vcf_path = f'/mnt/project/Bulk/Previous WGS releases/GATK and GraphTyper WGS/SHAPEIT Phased VCFs/ukb20279_c{chrom}_b0_v1.vcf.gz'
 
     get_partitions(vcf_path, args.region, args.window_size)
