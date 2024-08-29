@@ -13,7 +13,7 @@ args = parser.parse_args()
 mtx_path = f'{args.partition_identifier}.npz'
 sparse_matrix = scipy.sparse.load_npz(mtx_path)
 n, m = sparse_matrix.shape
-# af = np.diff(sparse_matrix.indptr) / n
+af = np.diff(sparse_matrix.indptr) / n
 # incl = (af > 0) * (af < 1)
 # genotypes = sparse_matrix[:, incl == 1]
 genotypes = sparse_matrix
