@@ -10,9 +10,13 @@ parser.add_argument('run_identifier', type=str)
 args = parser.parse_args()
 
 merged_graph, variant_indices, num_samples, index_mapping = merge_brick_graphs(f'/mnt/project/linear_arg_results/{args.run_identifier}/brick_graph_partitions')
+print(f'number of total nodes across graphs: {np.sum([len(x) for x in index_mapping])}')
+print(f'number of expected nodes in merged graph: {np.sum([len(x) for x in index_mapping]) - num_samples*(len(index_mapping)-1)}')
+print(f'number of nodes in merged graph: {merged_graph.number_of_nodes}')
 merged_graph_recom = ld.Recombination.from_graph(merged_graph)
 merged_graph_recom.find_recombinations()
 linear_arg_adjacency_matrix = linearize_brick_graph(merged_graph_recom)
+# linear_arg_adjacency_matrix = linearize_brick_graph(merged_graph)
 variants_flipped_ref_alt = np.zeros(len(variant_indices), dtype=bool) # may have to change this eventually
 sample_idx = np.arange(num_samples)
 linarg = ld.LinearARG(linear_arg_adjacency_matrix, sample_idx, variant_indices, variants_flipped_ref_alt)

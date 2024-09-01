@@ -20,12 +20,14 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
     ploidy = 1 if phased else 2
     
     variant_metadata_path = f'variant_metadata/{out_prefix}_{region}.txt'
-    with open(variant_metadata_path, 'w') as f:
-        f.write("##fileformat=PVARv1.0\n")
-        f.write("##INFO=<ID=IDX,Number=1,Type=Integer,Description=\"Variant Index\">\n")
-        f.write("##INFO=<ID=FLIP,Number=1,Type=Integer,Description=\"Flip Information\">\n")
-        f.write("#CHROM POS ID REF ALT INFO\n")
-    f = open(variant_metadata_path, 'a')
+    # with open(variant_metadata_path, 'w') as f:
+    #     f.write("##fileformat=PVARv1.0\n")
+    #     f.write("##INFO=<ID=IDX,Number=1,Type=Integer,Description=\"Variant Index\">\n")
+    #     f.write("##INFO=<ID=FLIP,Number=1,Type=Integer,Description=\"Flip Information\">\n")
+    #     f.write("#CHROM POS ID REF ALT INFO\n")
+    # f = open(variant_metadata_path, 'a')
+    f = open(variant_metadata_path, 'w')
+    f.write(' '.join(['CHROM', 'POS', 'ID', 'REF', 'ALT', 'FLIP', 'IDX'])+'\n')
     var_index = 0
     # TODO: handle missing data
     for var in vcf(region_formatted):
@@ -40,12 +42,16 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
                 flip = True
             else:
                 flip = False
+        
+        if (af == 0) or (af == 1): # filter out variants with af=0 or af=1
+            continue
 
         (idx,) = np.where(gts != 0)
         data.append(gts[idx])
         idxs.append(idx)
         ptrs.append(ptrs[-1] + len(idx))    
-        f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
+        # f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
+        f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), str(var_index), str(int(flip))])+'\n')
         var_index += 1
     
     f.close()
