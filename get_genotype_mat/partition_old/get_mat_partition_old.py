@@ -40,6 +40,10 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
                 flip = True
             else:
                 flip = False
+                
+        af = np.mean(gts) / ploidy
+        if (af == 0) or (af == 1): # filter out variants with af=0 or af=1
+            continue
 
         (idx,) = np.where(gts != 0)
         data.append(gts[idx])

@@ -43,6 +43,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
             else:
                 flip = False
         
+        af = np.mean(gts) / ploidy
         if (af == 0) or (af == 1): # filter out variants with af=0 or af=1
             continue
 
@@ -51,7 +52,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
         idxs.append(idx)
         ptrs.append(ptrs[-1] + len(idx))    
         # f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), f'IDX={var_index};FLIP={int(flip)}'])+'\n')
-        f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), str(var_index), str(int(flip))])+'\n')
+        f.write(' '.join([chrom, str(var.POS), '.', var.REF, ','.join(var.ALT), str(int(flip)), str(var_index)])+'\n')
         var_index += 1
     
     f.close()
