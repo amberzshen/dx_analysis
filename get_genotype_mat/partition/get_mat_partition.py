@@ -45,6 +45,7 @@ def vcf_to_csc(region: str, out_prefix: str, phased: bool = False, flip_minor_al
         
         af = np.mean(gts) / ploidy
         if (af == 0) or (af == 1): # filter out variants with af=0 or af=1
+            # should save these to separate text file
             continue
 
         (idx,) = np.where(gts != 0)

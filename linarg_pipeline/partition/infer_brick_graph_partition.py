@@ -14,8 +14,6 @@ mtx_path = f'{args.partition_identifier}.npz'
 sparse_matrix = scipy.sparse.load_npz(mtx_path)
 n, m = sparse_matrix.shape
 af = np.diff(sparse_matrix.indptr) / n
-# incl = (af > 0) * (af < 1)
-# genotypes = sparse_matrix[:, incl == 1]
 genotypes = sparse_matrix
 
 brick_graph, samples_idx, variants_idx = ld.BrickGraph.from_genotypes(genotypes)
@@ -38,6 +36,7 @@ geno_nnz = np.sum(n * np.minimum(af, 1-af))
 nnz_ratio = geno_nnz / adj_mat.nnz
 stats = [args.partition_identifier, str(n), str(m), str(runtime), str(geno_nnz), str(adj_mat.nnz), str(nnz_ratio)]
 
+# separate times for each step
 with open(f'brick_graph_partition_stats/{args.partition_identifier}.txt', 'w') as file:
     file.write("\t".join(['partition_identifier', 'n', 'm', 'runtime', 'geno_nnz', 'brickgraph_nnz', 'nnz_ratio'])+'\n')
     file.write("\t".join(stats)+'\n')
