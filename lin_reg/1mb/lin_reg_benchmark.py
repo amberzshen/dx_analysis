@@ -3,8 +3,12 @@ import argparse
 import numpy as np
 import os
 import time
+import polars as pl
 import linear_dag as ld
 from linear_dag.brick_graph import read_brick_graph_npz
+from linear_dag.recombination import Recombination
+from linear_dag.one_summed_cy import linearize_brick_graph
+from linear_dag.lineararg import VariantInfo, LinearARG
 
 
 def load_linarg(linarg_dir, partition_id):    
@@ -13,7 +17,8 @@ def load_linarg(linarg_dir, partition_id):
     brick_graph_recom.find_recombinations()
     linear_arg_adjacency_matrix = linearize_brick_graph(brick_graph_recom)
     var_info = pl.read_csv(f'{linarg_dir}/variant_metadata/{partition_id}.txt', separator=' ')
-    var_info = var_info.with_columns(variant_indices.alias('IDX'))
+    var_info = var_info.with_columns(pl.Series(variant_indices).alias('IDX'))
+    var_info = VariantInfo(var_info)
     linarg = LinearARG(linear_arg_adjacency_matrix, sample_indices, var_info)
     linarg = linarg.make_triangular()
     return linarg
@@ -25,6 +30,8 @@ def load_genotypes(linarg_dir, partition_id):
     
 
 def run_regression(X, data_type, partition_id, res_dir):
+    
+    if not os.path.exists(f'{res_dir}/'): os.makedirs(f'{res_dir}/')
     
     N = int(X.shape[0] / 2)
     M = int(X.shape[1])
@@ -43,14 +50,14 @@ def run_regression(X, data_type, partition_id, res_dir):
         allele_counts =  ((np.ones(N) @ S) @ X) [0]
     else:
         xTy = ((y @ S) @ X)
-        allele_counts =  ((np.ones(N) @ S) @ linarg)
+        allele_counts =  ((np.ones(N) @ S) @ X)
     xTx = 2 / N * allele_counts * (N - allele_counts) # 2Npq
     effect_sizes_linarg = xTy / xTx
     end = time.time()
 
     with open(f'{res_dir}/{partition_id}_{data_type}.txt', 'w') as file:
-        file.write(" ".join([partition_id, data_type, 'n', 'm', 'time'])+'\n')
-        file.write(" ".join([str(N), str(M), str(np.round(end-start, 3))])+'\n')
+        file.write(" ".join(['partition_id', 'data_type', 'n', 'm', 'time'])+'\n')
+        file.write(" ".join([partition_id, data_type, str(N), str(M), str(np.round(end-start, 3))])+'\n')
 
 
 def benchmark_regression(linarg_dir, partition_id, data_type, res_dir):
