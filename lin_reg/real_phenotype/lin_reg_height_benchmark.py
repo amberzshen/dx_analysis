@@ -71,14 +71,16 @@ def linarg_regression(linarg, y, R):
     N = R.shape[0]
 
     start = time.time()
-    X = sp.linalg.aslinearoperator(R) @ sp.linalg.aslinearoperator(S) @ linarg
-    xTy = X.rmatvec(y.T)
+    X = sp.linalg.aslinearoperator(R) @ sp.linalg.aslinearoperator(S) @ linarg # normalize
+    xTy = X.rmatvec(y.T) # divide by sqrt(2)
     
-    allele_counts = X.rmatvec((np.ones(N)).T)
-    xTx = 2 / N * allele_counts * (N - allele_counts) # 2Npq
+    # allele_counts = X.rmatvec((np.ones(N)).T)
+    # xTx = 2 / N * allele_counts * (N - allele_counts) # 2Npq (function for this)
     
-    effect_sizes_linarg = xTy / xTx
+    # effect_sizes_linarg = xTy / xTx
     end = time.time()
+    
+    # save and download effect sizes
     
     return end-start, N, M
 

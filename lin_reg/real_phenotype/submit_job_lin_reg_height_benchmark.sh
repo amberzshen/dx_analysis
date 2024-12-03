@@ -2,7 +2,7 @@
 
 linarg_dir="/mnt/project/linear_args/ukb20279/chr1/"
 linarg_dx_dir="linear_args/ukb20279/chr1/"
-res_dir="lin_reg_benchmark/height_benchmark"
+res_dir="lin_reg_benchmark/height_benchmark_scipy1.14.1"
 
 # partition_id="0_chr1-15916-22645888"
 # data_type="linarg"
