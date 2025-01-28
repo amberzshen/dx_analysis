@@ -11,8 +11,8 @@ def get_statistics(linarg_dir, beta_dir, out_dir, partition_id):
     
     if not os.path.exists(f'{out_dir}/regression_statistics/'): os.makedirs(f'{out_dir}/regression_statistics/')
     
-    beta_hats = np.load(f'{beta_dir}/{partition_id}_genotypes.npy')
-    # beta_hats = np.load(f'{beta_dir}/{partition_id}_linarg.npy')
+    # beta_hats = np.load(f'{beta_dir}/{partition_id}_genotypes.npy')
+    beta_hats = np.load(f'{beta_dir}/{partition_id}_linarg.npy')
     linarg = ld.LinearARG.read(f'{linarg_dir}/{partition_id}/linear_arg.npz', f'{linarg_dir}/{partition_id}/linear_arg.pvar', f'{linarg_dir}/{partition_id}/linear_arg.psam')    
     df = linarg.variants.table
     N = linarg.shape[0] / 2 # roughly, maybe change this to be exact

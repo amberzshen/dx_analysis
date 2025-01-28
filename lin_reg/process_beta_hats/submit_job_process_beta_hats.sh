@@ -1,7 +1,7 @@
 #!/bin/bash
 linarg_dir="/mnt/project/linear_args/ukb20279/chr1/"
-beta_dir="/mnt/project/lin_reg_benchmark/height_benchmark_w_covariates_Ynorm/beta_hats/"
-out_dir="lin_reg_benchmark/height_benchmark_w_covariates_Ynorm/"
+beta_dir="/mnt/project/lin_reg_benchmark/whitelist_sanity_check_chr22/beta_hats/"
+out_dir="lin_reg_benchmark/whitelist_sanity_check_chr22/"
 
 partition_ids=( $(dx ls linear_args/ukb20279/chr1/) )
 for partition_id in "${partition_ids[@]}"
@@ -20,4 +20,6 @@ for partition_id in "${partition_ids[@]}"
             --name "process_beta_hats" \
             --brief \
             -y
+        
+        break
     done

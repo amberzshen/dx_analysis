@@ -10,8 +10,14 @@ import pandas as pd
 
 
 def load_linarg(linarg_dir, partition_id):
-    start = time.time()
+    save_dir = linarg_dir.split('/mnt/project/')[1]
+    if not os.path.exists(f'{save_dir}/{partition_id}/'):
+        os.makedirs(f'{save_dir}/{partition_id}/')
     linarg = ld.LinearARG.read(f'{linarg_dir}/{partition_id}/linear_arg.npz', f'{linarg_dir}/{partition_id}/linear_arg.pvar', f'{linarg_dir}/{partition_id}/linear_arg.psam')    
+    linarg = linarg.make_triangular()
+    linarg.write(f'{save_dir}/{partition_id}/linear_arg_triangular')
+    start = time.time()    
+    linarg = ld.LinearARG.read(f'{save_dir}/{partition_id}/linear_arg_triangular.npz', f'{save_dir}/{partition_id}/linear_arg_triangular.pvar', f'{save_dir}/{partition_id}/linear_arg_triangular.psam')
     end = time.time()
     return linarg, end-start
 
@@ -27,37 +33,43 @@ def load_genotypes(linarg_dir, partition_id):
     return genotypes, end-start
 
 
-def get_phenotype_covariates():
+def get_phenotype_covariates(phenotype, covariates, phenotypes, sample_ids):
     
-    phenotype = 'p50_i0'
-    covariates = ['p21022', 'sex'] + [f'p22009_a{i}' for i in range(1,41)]
+    phenotypes = phenotypes[['eid', phenotype]+covariates]
+    N = len(sample_ids)
+    sample_to_ind = {phenotypes.eid[i]: i for i in range(phenotypes.shape[0])}
+    order = np.full((phenotypes.shape[0], 1), np.nan) # map dataframe rows to sample_ids order
+    samples_to_remove = []
     
-    sample_metadata = pd.read_csv('/mnt/project/sample_metadata/ukb20279/250122_sampleIndex_sampleID_withdrawnRemoved.csv')
-    phenotypes = pd.read_csv('/mnt/project/phenotypes/age_sex_height_pcs.csv')
-    phenotypes['sex'] = [0 if phenotypes.p31[i]=='Male' else 1 for i in range(phenotypes.shape[0])]
-    phenotypes.index = phenotypes.eid
-    phenotypes = phenotypes.loc[list(sample_metadata.sample_id)] # filter and order phenotypes by sample_metadata
-    
-    N = len(phenotypes)
+    for i in range(N):
+        if not sample_ids[i].isdigit():
+            samples_to_remove.append(i) # remove withdrawn samples
+        else:
+            order[sample_to_ind[int(sample_ids[i])]] = i
+
+    phenotypes['order'] = order
+    phenotypes = phenotypes.sort_values(by='order', ascending=True)
+    phenotypes = phenotypes.reset_index()
     rows_to_drop = np.where(phenotypes.isnull().any(axis=1))[0] # remove any samples with missing phenotypes or covariates
-    phenotypes = phenotypes.drop(phenotypes.index[rows_to_drop])
+    samples_to_remove += [x for x in list(phenotypes.order[np.where(phenotypes.isnull().any(axis=1))[0]]) if not np.isnan(x)]
+    phenotypes = phenotypes[~phenotypes.index.isin(rows_to_drop)]
     C = sp.csr_matrix(phenotypes[covariates].to_numpy())
     y = np.array(phenotypes[phenotype])
 
-    data = np.ones(N-len(rows_to_drop))
-    row_indices = np.arange(N-len(rows_to_drop))
-    col_indices = np.setdiff1d(np.arange(N), rows_to_drop)
-    R = sp.csr_matrix((data, (row_indices, col_indices)), shape=(N-len(rows_to_drop), N))
-        
-    P = sp.linalg.aslinearoperator(sp.eye(R.shape[0])) - sp.linalg.LinearOperator((C.shape[0], C.shape[0]), matvec=lambda x: C @ sp.linalg.lsqr(C, C @ (C.T @ x))[0])
+    data = np.ones(N-len(samples_to_remove))
+    row_indices = np.arange(N-len(samples_to_remove))
+    col_indices = np.setdiff1d(np.arange(N), samples_to_remove)
+    R = sp.csr_matrix((data, (row_indices, col_indices)), shape=(N-len(samples_to_remove), N))
+    
+    P = sp.linalg.aslinearoperator(sp.eye(R.shape[0])) - sp.linalg.aslinearoperator(C) @ sp.linalg.aslinearoperator(sp.linalg.spsolve(C.T @ C, C.T))
     y_resid = P @ y.T
     y_resid = y_resid - np.mean(y_resid)
     y_resid = y_resid / np.std(y_resid)
     
-    return y_resid, R
+    return y_resid, C, R
 
 
-def get_sum_matrix(N):
+def get_sum_matrix(N, M):
     data = np.ones(2*N)
     row_indices = np.repeat(np.arange(N), 2)
     col_indices = np.arange(2*N)
@@ -65,24 +77,27 @@ def get_sum_matrix(N):
     return S
 
 
-def linarg_regression(linarg, y_resid, R):
+def linarg_regression(linarg, y_resid, R, C):
     
-    N_individuals = int(linarg.shape[0] / 2)
-    S = get_sum_matrix(N_individuals)
+    N_total = int(linarg.shape[0] / 2)
+    M = int(linarg.shape[1])
+    S = get_sum_matrix(N_total, M)
     N = R.shape[0]
 
     start = time.time()
     X = sp.linalg.aslinearoperator(R) @ sp.linalg.aslinearoperator(S) @ linarg.normalized
+    P = sp.linalg.aslinearoperator(sp.eye(N)) - sp.linalg.aslinearoperator(C) @ sp.linalg.aslinearoperator(sp.linalg.spsolve(C.T @ C, C.T))
     beta_hat = (X.T @ y_resid) / (2**0.5 * N)
     end = time.time()
         
     return beta_hat, end-start
 
 
-def genotypes_regression(genotypes, y_resid, R):
+def genotypes_regression(genotypes, y_resid, R, C):
     
-    N_individuals = int(genotypes.shape[0] / 2)
-    S = get_sum_matrix(N_individuals)
+    N_total = int(genotypes.shape[0] / 2)
+    M = int(genotypes.shape[1])
+    S = get_sum_matrix(N_total, M)
     N = R.shape[0]
     
     start = time.time()
@@ -92,6 +107,8 @@ def genotypes_regression(genotypes, y_resid, R):
     pq[pq == 0] = 1
     G = (sp.linalg.aslinearoperator(genotypes) - mean) * sp.linalg.aslinearoperator(sp.diags(pq**-0.5))
     X = sp.linalg.aslinearoperator(R) @ sp.linalg.aslinearoperator(S) @ G    
+    P = sp.linalg.aslinearoperator(sp.eye(N)) - sp.linalg.aslinearoperator(C) @ sp.linalg.aslinearoperator(sp.linalg.spsolve(C.T @ C, C.T))
+    # beta_hat = (X.T @ P.T @ P @ y_resid) / (2**0.5 * N)
     beta_hat = (X.T @ y_resid) / (2**0.5 * N)
     end = time.time()
     
@@ -104,14 +121,20 @@ def benchmark_regression(linarg_dir, partition_id, data_type, res_dir):
     if not os.path.exists(f'{res_dir}/statistics/'): os.makedirs(f'{res_dir}/statistics/')
     if not os.path.exists(f'{res_dir}/beta_hats/'): os.makedirs(f'{res_dir}/beta_hats/')
     
-    y_resid, R = get_phenotype_covariates()
+    # load height data and covariates
+    phenotypes = pd.read_csv('/mnt/project/phenotypes/age_sex_height_pcs.csv')
+    phenotypes['sex'] = [0 if phenotypes.p31[i]=='Male' else 1 for i in range(phenotypes.shape[0])]
+    with open('/mnt/project/linear_args/ukb20279/sample_ids.txt', 'r') as file:
+        sample_ids = [line.strip() for line in file]
+    covariates = ['p21022', 'sex'] + [f'p22009_a{i}' for i in range(1,41)]
+    y, C, R = get_phenotype_covariates('p50_i0', covariates, phenotypes, sample_ids)
     
     if data_type == 'linarg':
         linarg, load_time = load_linarg(linarg_dir, partition_id)
-        beta_hats, reg_time = linarg_regression(linarg, y_resid, R)
+        beta_hats, reg_time = linarg_regression(linarg, y, R, C)
     else:
         genotypes, load_time = load_genotypes(linarg_dir, partition_id)
-        beta_hats, reg_time = genotypes_regression(genotypes, y_resid, R)
+        beta_hats, reg_time = genotypes_regression(genotypes, y, R, C)
         
     np.save(f'{res_dir}/beta_hats/{partition_id}_{data_type}.npy', beta_hats)
     with open(f'{res_dir}/statistics/{partition_id}_{data_type}.txt', 'w') as file:
