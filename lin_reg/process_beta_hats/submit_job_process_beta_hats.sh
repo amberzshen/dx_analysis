@@ -1,9 +1,9 @@
 #!/bin/bash
-linarg_dir="/mnt/project/linear_args/ukb20279/chr1/"
+linarg_dir="/mnt/project/linear_args/ukb20279/chr22/"
 beta_dir="/mnt/project/lin_reg_benchmark/whitelist_sanity_check_chr22/beta_hats/"
 out_dir="lin_reg_benchmark/whitelist_sanity_check_chr22/"
 
-partition_ids=( $(dx ls linear_args/ukb20279/chr1/) )
+partition_ids=( $(dx ls linear_args/ukb20279/chr22/) )
 for partition_id in "${partition_ids[@]}"
     do
         partition_id=$(echo "$partition_id" | rev | cut -c 2- | rev)
@@ -21,5 +21,4 @@ for partition_id in "${partition_ids[@]}"
             --brief \
             -y
         
-        break
     done

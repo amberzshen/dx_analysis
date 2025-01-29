@@ -43,16 +43,16 @@ def get_phenotype_covariates():
     phenotypes = phenotypes.drop(phenotypes.index[rows_to_drop])
     C = sp.csr_matrix(phenotypes[covariates].to_numpy())
     y = np.array(phenotypes[phenotype])
+    y_norm = (y - np.mean(y)) / np.std(y)
 
     data = np.ones(N-len(rows_to_drop))
     row_indices = np.arange(N-len(rows_to_drop))
     col_indices = np.setdiff1d(np.arange(N), rows_to_drop)
     R = sp.csr_matrix((data, (row_indices, col_indices)), shape=(N-len(rows_to_drop), N))
         
-    P = sp.linalg.aslinearoperator(sp.eye(R.shape[0])) - sp.linalg.LinearOperator((C.shape[0], C.shape[0]), matvec=lambda x: C @ sp.linalg.lsqr(C, C @ (C.T @ x))[0])
-    y_resid = P @ y.T
-    y_resid = y_resid - np.mean(y_resid)
-    y_resid = y_resid / np.std(y_resid)
+    P = sp.linalg.aslinearoperator(sp.eye(R.shape[0])) - sp.linalg.aslinearoperator(C) @ sp.linalg.aslinearoperator(sp.linalg.spsolve(C.T @ C, C.T))
+    y_resid = P @ y_norm.T
+    y_resid = (y_resid - np.mean(y_resid)) / np.std(y_resid)
     
     return y_resid, R
 

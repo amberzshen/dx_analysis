@@ -1,7 +1,7 @@
 #!/bin/bash
 
-linarg_dir="/mnt/project/linear_args/ukb20279_old/chr1/"
-linarg_dx_dir="linear_args/ukb20279_old/chr1/"
+linarg_dir="/mnt/project/linear_args/ukb20279/chr22/"
+linarg_dx_dir="linear_args/ukb20279/chr22/"
 res_dir="lin_reg_benchmark/whitelist_sanity_check_chr22"
 
 # partition_id="0_chr1-15916-22645888"
@@ -32,7 +32,7 @@ res_dir="lin_reg_benchmark/whitelist_sanity_check_chr22"
 #     -y
 
 
-partition_ids=( $(dx ls linear_args/ukb20279_old/chr1/) )
+partition_ids=( $(dx ls linear_args/ukb20279/chr22/) )
 for partition_id in "${partition_ids[@]}"; do
 
 
@@ -64,8 +64,6 @@ for partition_id in "${partition_ids[@]}"; do
         #     --name "lin_reg_height_w_covariates_${data_type}_${partition_id}" \
         #     --brief \
         #     -y
-
-        break
 
     done
 
