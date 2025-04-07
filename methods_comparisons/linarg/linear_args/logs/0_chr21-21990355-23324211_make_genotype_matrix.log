@@ -1,0 +1,4 @@
+2025-02-06 12:17:08,188 - linear_dag.core.partition_merge - INFO - [Memory: 73.73 MB] - Reading vcf as sparse matrix
+2025-02-06 12:18:05,713 - linear_dag.core.partition_merge - INFO - [Memory: 75.01 MB] - Reading vcf as sparse matrix
+2025-02-06 12:18:13,816 - linear_dag.core.partition_merge - INFO - [Memory: 242.02 MB] - vcf to sparse matrix completed in 8.103 seconds
+2025-02-06 12:18:13,817 - linear_dag.core.partition_merge - INFO - [Memory: 242.02 MB] - Saving genotype matrix and variant metadata

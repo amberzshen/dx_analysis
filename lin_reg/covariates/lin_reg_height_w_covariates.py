@@ -35,6 +35,7 @@ def get_phenotype_covariates():
     sample_metadata = pd.read_csv('/mnt/project/sample_metadata/ukb20279/250122_sampleIndex_sampleID_withdrawnRemoved.csv')
     phenotypes = pd.read_csv('/mnt/project/phenotypes/age_sex_height_pcs.csv')
     phenotypes['sex'] = [0 if phenotypes.p31[i]=='Male' else 1 for i in range(phenotypes.shape[0])]
+    phenotypes = phenotypes[['eid', phenotype]+covariates]
     phenotypes.index = phenotypes.eid
     phenotypes = phenotypes.loc[list(sample_metadata.sample_id)] # filter and order phenotypes by sample_metadata
     

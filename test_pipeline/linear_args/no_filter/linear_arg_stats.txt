@@ -1,0 +1,2 @@
+n m genotypes_nnz linarg_nnz brick_graph_nnz linarg_nnz_ratio brick_graph_nnz_ratio correct_allele_counts
+6404 35306 22391895 530000 512808 42.249 43.665 True

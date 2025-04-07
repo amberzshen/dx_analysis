@@ -1,0 +1,7 @@
+2025-02-20 13:09:34,382 - linear_dag.core.partition_merge - INFO - [Memory: 73.89 MB] - Merging brick graphs
+2025-02-20 13:09:35,263 - linear_dag.core.partition_merge - INFO - [Memory: 170.89 MB] - Brick graphs merged in 0.88 seconds
+2025-02-20 13:09:35,263 - linear_dag.core.partition_merge - INFO - [Memory: 170.89 MB] - Finding recombinations
+2025-02-20 13:09:35,801 - linear_dag.core.partition_merge - INFO - [Memory: 285.58 MB] - Recombinations found in 0.538 seconds
+2025-02-20 13:09:35,801 - linear_dag.core.partition_merge - INFO - [Memory: 285.58 MB] - Linearizing brick graph
+2025-02-20 13:09:42,526 - linear_dag.core.partition_merge - INFO - [Memory: 293.21 MB] - Linearized brick graph in 6.725 seconds
+2025-02-20 13:09:42,526 - linear_dag.core.partition_merge - INFO - [Memory: 293.22 MB] - Saving merged linear ARG and variant metadata

@@ -1,0 +1,11 @@
+dx run app-swiss-army-knife \
+    -iin="/amber/scripts/grg_dot_product.py" \
+    -iin="/amber/scripts/run_grg_dot_product.sh" \
+    -iin="/methods_comparisons/grg/ukb20279_c21_b0_v1_250129_whitelist.grg" \
+    -icmd="bash run_grg_dot_product.sh" \
+    --destination "/methods_comparisons/grg/" \
+    --instance-type mem3_ssd1_v2_x16 \
+    --priority high \
+    --name "grg_dot_product" \
+    --brief \
+    -y

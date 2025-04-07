@@ -1,0 +1,5 @@
+2025-02-24 09:01:29,333 - linear_dag.core.partition_merge - INFO - [Memory: 76.51 MB] - Reading vcf as sparse matrix
+2025-03-28 19:43:29,869 - linear_dag.core.partition_merge - INFO - [Memory: 74.26 MB] - Reading vcf as sparse matrix
+2025-03-28 19:45:21,326 - linear_dag.core.partition_merge - INFO - [Memory: 75.47 MB] - Reading vcf as sparse matrix
+2025-03-28 19:47:45,521 - linear_dag.core.partition_merge - INFO - [Memory: 74.20 MB] - Reading vcf as sparse matrix
+2025-03-28 19:47:45,551 - linear_dag.core.partition_merge - INFO - [Memory: 76.16 MB] - No variants found
