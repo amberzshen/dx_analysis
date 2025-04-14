@@ -1,0 +1,72 @@
+2025-04-08 18:25:11,740 - linear_dag.core.partition_merge - INFO - [Memory: 73.80 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:25:36,589 - linear_dag.core.partition_merge - INFO - [Memory: 73.27 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:27:04,661 - linear_dag.core.partition_merge - INFO - [Memory: 73.36 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:27:38,920 - linear_dag.core.partition_merge - INFO - [Memory: 73.24 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:34:52,914 - linear_dag.core.partition_merge - INFO - [Memory: 73.73 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:36:51,326 - linear_dag.core.partition_merge - INFO - [Memory: 73.30 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:36:52,640 - linear_dag.core.partition_merge - INFO - [Memory: 535.64 MB] - Loaded in 1.314 seconds
+2025-04-08 18:36:52,641 - linear_dag.core.partition_merge - INFO - [Memory: 535.64 MB] - Combining nodes and computing reduction union
+2025-04-08 18:38:27,890 - linear_dag.core.partition_merge - INFO - [Memory: 74.44 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:38:29,300 - linear_dag.core.partition_merge - INFO - [Memory: 539.91 MB] - Loaded in 1.409 seconds
+2025-04-08 18:38:29,300 - linear_dag.core.partition_merge - INFO - [Memory: 539.91 MB] - Combining nodes and computing reduction union
+2025-04-08 18:39:35,036 - linear_dag.core.partition_merge - INFO - [Memory: 73.39 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:39:36,463 - linear_dag.core.partition_merge - INFO - [Memory: 571.43 MB] - Loaded in 1.426 seconds
+2025-04-08 18:39:36,463 - linear_dag.core.partition_merge - INFO - [Memory: 571.43 MB] - Combining nodes and computing reduction union
+2025-04-08 18:39:37,121 - linear_dag.core.partition_merge - INFO - [Memory: 826.61 MB] - Combined nodes and computed reduction union in 0.658 seconds
+2025-04-08 18:39:37,121 - linear_dag.core.partition_merge - INFO - [Memory: 826.61 MB] - Finding recombinations
+2025-04-08 18:39:42,861 - linear_dag.core.partition_merge - INFO - [Memory: 1672.00 MB] - Found recombinations in 5.74 seconds
+2025-04-08 18:39:42,985 - linear_dag.core.partition_merge - INFO - [Memory: 1684.95 MB] - Saving brick graph
+2025-04-08 18:51:00,535 - linear_dag.core.partition_merge - INFO - [Memory: 73.35 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:51:01,981 - linear_dag.core.partition_merge - INFO - [Memory: 571.73 MB] - Loaded in 1.445 seconds
+2025-04-08 18:51:01,982 - linear_dag.core.partition_merge - INFO - [Memory: 571.74 MB] - Combining nodes and computing reduction union
+2025-04-08 18:51:02,644 - linear_dag.core.partition_merge - INFO - [Memory: 916.80 MB] - Combined nodes and computed reduction union in 0.662 seconds
+2025-04-08 18:51:02,644 - linear_dag.core.partition_merge - INFO - [Memory: 916.80 MB] - Finding recombinations
+2025-04-08 18:51:08,496 - linear_dag.core.partition_merge - INFO - [Memory: 1783.29 MB] - Found recombinations in 5.851 seconds
+2025-04-08 18:51:08,616 - linear_dag.core.partition_merge - INFO - [Memory: 1794.64 MB] - Saving brick graph
+2025-04-08 18:59:01,869 - linear_dag.core.partition_merge - INFO - [Memory: 74.44 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 18:59:03,303 - linear_dag.core.partition_merge - INFO - [Memory: 575.21 MB] - Loaded in 1.433 seconds
+2025-04-08 18:59:03,303 - linear_dag.core.partition_merge - INFO - [Memory: 575.22 MB] - Combining nodes and computing reduction union
+2025-04-08 18:59:03,967 - linear_dag.core.partition_merge - INFO - [Memory: 890.30 MB] - Combined nodes and computed reduction union in 0.663 seconds
+2025-04-08 18:59:03,967 - linear_dag.core.partition_merge - INFO - [Memory: 890.30 MB] - Finding recombinations
+2025-04-08 18:59:09,907 - linear_dag.core.partition_merge - INFO - [Memory: 1644.53 MB] - Found recombinations in 5.94 seconds
+2025-04-08 18:59:10,030 - linear_dag.core.partition_merge - INFO - [Memory: 1660.96 MB] - Saving brick graph
+2025-04-08 19:00:44,208 - linear_dag.core.partition_merge - INFO - [Memory: 73.68 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 19:00:45,616 - linear_dag.core.partition_merge - INFO - [Memory: 571.79 MB] - Loaded in 1.407 seconds
+2025-04-08 19:00:45,616 - linear_dag.core.partition_merge - INFO - [Memory: 571.79 MB] - Combining nodes and computing reduction union
+2025-04-08 19:00:46,248 - linear_dag.core.partition_merge - INFO - [Memory: 916.87 MB] - Combined nodes and computed reduction union in 0.632 seconds
+2025-04-08 19:00:46,248 - linear_dag.core.partition_merge - INFO - [Memory: 916.87 MB] - Finding recombinations
+2025-04-08 19:00:52,017 - linear_dag.core.partition_merge - INFO - [Memory: 1373.29 MB] - Found recombinations in 5.768 seconds
+2025-04-08 19:00:52,141 - linear_dag.core.partition_merge - INFO - [Memory: 1389.60 MB] - Saving brick graph
+2025-04-08 19:00:52,153 - linear_dag.core.partition_merge - INFO - [Memory: 1392.47 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978
+2025-04-08 19:08:26,301 - linear_dag.core.partition_merge - INFO - [Memory: 73.81 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-08 19:08:27,707 - linear_dag.core.partition_merge - INFO - [Memory: 580.83 MB] - Loaded in 1.405 seconds
+2025-04-08 19:08:27,707 - linear_dag.core.partition_merge - INFO - [Memory: 580.84 MB] - Combining nodes and computing reduction union
+2025-04-08 19:08:28,357 - linear_dag.core.partition_merge - INFO - [Memory: 925.91 MB] - Combined nodes and computed reduction union in 0.65 seconds
+2025-04-08 19:08:28,358 - linear_dag.core.partition_merge - INFO - [Memory: 925.91 MB] - Finding recombinations
+2025-04-08 19:08:34,201 - linear_dag.core.partition_merge - INFO - [Memory: 1644.76 MB] - Found recombinations in 5.843 seconds
+2025-04-08 19:08:34,331 - linear_dag.core.partition_merge - INFO - [Memory: 1654.89 MB] - Saving brick graph
+2025-04-08 19:08:34,342 - linear_dag.core.partition_merge - INFO - [Memory: 1657.56 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978
+2025-04-09 09:24:20,655 - linear_dag.core.partition_merge - INFO - [Memory: 73.81 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-09 09:24:22,182 - linear_dag.core.partition_merge - INFO - [Memory: 588.70 MB] - Loaded in 1.526 seconds
+2025-04-09 09:24:22,182 - linear_dag.core.partition_merge - INFO - [Memory: 588.71 MB] - Combining nodes and computing reduction union
+2025-04-09 09:24:22,995 - linear_dag.core.partition_merge - INFO - [Memory: 896.56 MB] - Combined nodes and computed reduction union in 0.813 seconds
+2025-04-09 09:24:22,995 - linear_dag.core.partition_merge - INFO - [Memory: 896.56 MB] - Finding recombinations
+2025-04-09 09:24:29,119 - linear_dag.core.partition_merge - INFO - [Memory: 1710.31 MB] - Found recombinations in 6.123 seconds
+2025-04-09 09:24:29,239 - linear_dag.core.partition_merge - INFO - [Memory: 1719.82 MB] - Saving brick graph
+2025-04-09 09:24:29,251 - linear_dag.core.partition_merge - INFO - [Memory: 1720.99 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978
+2025-04-09 09:26:16,023 - linear_dag.core.partition_merge - INFO - [Memory: 73.36 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-09 09:26:17,496 - linear_dag.core.partition_merge - INFO - [Memory: 571.95 MB] - Loaded in 1.473 seconds
+2025-04-09 09:26:17,496 - linear_dag.core.partition_merge - INFO - [Memory: 571.96 MB] - Combining nodes and computing reduction union
+2025-04-09 09:26:18,130 - linear_dag.core.partition_merge - INFO - [Memory: 917.02 MB] - Combined nodes and computed reduction union in 0.633 seconds
+2025-04-09 09:26:18,130 - linear_dag.core.partition_merge - INFO - [Memory: 917.02 MB] - Finding recombinations
+2025-04-09 09:26:24,028 - linear_dag.core.partition_merge - INFO - [Memory: 1413.98 MB] - Found recombinations in 5.897 seconds
+2025-04-09 09:26:24,149 - linear_dag.core.partition_merge - INFO - [Memory: 1422.20 MB] - Saving brick graph
+2025-04-09 09:26:24,159 - linear_dag.core.partition_merge - INFO - [Memory: 1423.92 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978
+2025-04-09 09:28:52,856 - linear_dag.core.partition_merge - INFO - [Memory: 73.29 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-04-09 09:28:54,294 - linear_dag.core.partition_merge - INFO - [Memory: 576.75 MB] - Loaded in 1.436 seconds
+2025-04-09 09:28:54,294 - linear_dag.core.partition_merge - INFO - [Memory: 576.76 MB] - Combining nodes and computing reduction union
+2025-04-09 09:28:54,888 - linear_dag.core.partition_merge - INFO - [Memory: 839.87 MB] - Combined nodes and computed reduction union in 0.594 seconds
+2025-04-09 09:28:54,889 - linear_dag.core.partition_merge - INFO - [Memory: 839.87 MB] - Finding recombinations
+2025-04-09 09:29:00,638 - linear_dag.core.partition_merge - INFO - [Memory: 1841.55 MB] - Found recombinations in 5.749 seconds
+2025-04-09 09:29:00,759 - linear_dag.core.partition_merge - INFO - [Memory: 1844.17 MB] - Saving brick graph
+2025-04-09 09:29:00,770 - linear_dag.core.partition_merge - INFO - [Memory: 1844.59 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978

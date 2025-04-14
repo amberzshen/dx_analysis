@@ -1,6 +1,8 @@
 #!/bin/bash
-vcf_path="/mnt/project/amber/filtered_vcfs/ukb20279_c21_b0_v1_250129_whitelist.vcf.gz"
-igd_path="ukb20279_c21_b0_v1_250129_whitelist.igd"
+chrom=$1
+
+vcf_path="/mnt/project/amber/filtered_vcfs/ukb20279_c${chrom}_b0_v1_250129_whitelist.vcf.gz"
+igd_path="ukb20279_c${chrom}_b0_v1_250129_whitelist.igd"
 
 # download python 3.10
 sudo apt update

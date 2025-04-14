@@ -1,8 +1,10 @@
+#!/bin/bash
+chrom=$1
+
 set -euo pipefail
 
-#!/bin/bash
-vcf_path="/mnt/project/amber/filtered_vcfs/ukb20279_c21_b0_v1_250129_whitelist.vcf.gz"
-output_name="ukb20279_c21_b0_v1_250129_whitelist.xsi"
+vcf_path="/mnt/project/amber/filtered_vcfs/ukb20279_c${chrom}_b0_v1_250129_whitelist.vcf.gz"
+output_name="ukb20279_c${chrom}_b0_v1_250129_whitelist.xsi"
 
 # Clone
 OUT_DIR=`pwd`
