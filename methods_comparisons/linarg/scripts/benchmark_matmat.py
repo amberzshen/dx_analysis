@@ -4,11 +4,12 @@ import pandas as pd
 import time
 import os
 import scipy.sparse as sp
+import h5py
 
 
 def load_linarg(linarg_dir, partition_id):
     start = time.time()
-    linarg = ld.LinearARG.read(f'{linarg_dir}/{partition_id}/linear_arg.npz', f'{linarg_dir}/{partition_id}/linear_arg.pvar.gz', f'{linarg_dir}/{partition_id}/linear_arg.psam.gz')    
+    linarg = ld.LinearARG.read(f'{linarg_dir}/{partition_id}/linear_arg.h5')    
     end = time.time()
     return linarg, end-start
 
@@ -18,8 +19,13 @@ def load_genotypes(linarg_dir, partition_id):
     mtx_files = os.listdir(f'{linarg_dir}/{partition_id}/genotype_matrices/')
     ind_arr = np.array([int(f.split('_')[0]) for f in mtx_files])
     order = ind_arr.argsort()
-    mtx_files = np.array(mtx_files)[order].tolist() # sort files by index
-    genotypes = sp.hstack([sp.load_npz(f'{linarg_dir}/{partition_id}/genotype_matrices/{m}') for m in mtx_files])   
+    files = np.array(mtx_files)[order].tolist()
+    genotypes = []
+    for f in files:
+        with h5py.File(f"{linarg_dir}/{partition_id}/genotype_matrices/{f}", 'r') as f:
+            g = sp.csc_matrix((f['data'][:], f['indices'][:], f['indptr'][:]), shape=f['shape'][:]) 
+        genotypes.append(g)
+    genotypes = sp.hstack(genotypes)
     end = time.time() 
     return genotypes, end-start
 
@@ -85,7 +91,8 @@ def benchmark_dot_product(linarg, genotypes, n_vectors):
     
     for n in n_vectors:
         
-        for data_type in ['float32', 'float64']:
+        # for data_type in ['float32', 'float64']:
+        for data_type in ['float32']:
             
             if (n == 1000) and (data_type == 'float64'):
                 continue
@@ -131,19 +138,19 @@ if __name__ == "__main__":
     
     print(f'running benchmark matmat', flush=True)
     
-    # linarg_dir = '/Users/ambershen/Desktop/linARG/dx_analysis/test_pipeline/linear_args/'
-    # partition_id = 'npz'
+    linarg_dir = '/Users/ambershen/Desktop/linARG/dx_analysis/test_pipeline/linear_args/'
+    partition_id = 'csc'
     
-    linarg_dir = '/mnt/project/linear_args/ukb20279/chr21/'
-    partition_id = '0_chr21-5030618-25863389'
+    # linarg_dir = '/mnt/project/linear_args/ukb20279/chr21/'
+    # partition_id = '0_chr21-5030618-25863389'
     
     linarg, linarg_load_time = load_linarg(linarg_dir, partition_id)
     print(f'linear ARG loaded in {np.round(linarg_load_time, 3)}s', flush=True)
     genotypes, genotypes_load_time = load_genotypes(linarg_dir, partition_id)
     print(f'genotypes loaded in {np.round(genotypes_load_time, 3)}s', flush=True)
-    
+        
     # n_vectors = [2, 5, 10]
-    n_vectors = [2, 5, 10, 100, 1000]
-    df = benchmark_dot_product(linarg, genotypes, n_vectors)
+    # n_vectors = [1, 2, 5, 10, 100, 1000]
+    # df = benchmark_dot_product(linarg, genotypes, n_vectors)
     
-    df.to_csv('matmat_benchmark_results.csv', index=False)
+    # df.to_csv('matmat_benchmark_results.csv', index=False)

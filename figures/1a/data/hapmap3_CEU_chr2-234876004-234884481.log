@@ -1,0 +1,37 @@
+PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)
+Options in effect:
+  --chr 2
+  --file /Users/ambershen/Desktop/linARG/data/hapmap3_r1_b36_fwd.qc.poly/hapmap3_r1_b36_fwd.CEU.qc.poly.recode
+  --from-bp 234876004
+  --out /Users/ambershen/Desktop/linARG/dx_analysis/figures/1a/data/hapmap3_CEU_chr2-234876004-234884481
+  --recode A
+  --to-bp 234884481
+
+Hostname: MacBook-Air-227.lan
+Working directory: /Users/ambershen/Desktop/linARG/dx_analysis/figures/1a/scripts
+Start time: Wed Apr 16 15:51:20 2025
+
+Random number seed: 1744833080
+24576 MB RAM detected; reserving 12288 MB for main workspace.
+Scanning .ped file... done.
+Performing single-pass .bed write (113300 variants, 162 people).
+--file:
+/Users/ambershen/Desktop/linARG/dx_analysis/figures/1a/data/hapmap3_CEU_chr2-234876004-234884481-temporary.bed
++
+/Users/ambershen/Desktop/linARG/dx_analysis/figures/1a/data/hapmap3_CEU_chr2-234876004-234884481-temporary.bim
++
+/Users/ambershen/Desktop/linARG/dx_analysis/figures/1a/data/hapmap3_CEU_chr2-234876004-234884481-temporary.fam
+written.
+15 out of 113300 variants loaded from .bim file.
+162 people (79 males, 83 females) loaded from .fam.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 109 founders and 53 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.999177.
+15 variants and 162 people pass filters and QC.
+Note: No phenotypes present.
+--recode A to
+/Users/ambershen/Desktop/linARG/dx_analysis/figures/1a/data/hapmap3_CEU_chr2-234876004-234884481.raw
+... done.
+
+End time: Wed Apr 16 15:51:21 2025

@@ -2,7 +2,7 @@ import pygrgl
 import numpy as np
 import time
 
-grg_path = 'ukb20279_c21_b0_v1_250129_whitelist.grg'
+grg_path = 'ukb20279_c11_b0_v1_250129_whitelist.grg'
 t1 = time.time()
 # grg = pygrgl.load_immutable_grg(grg_path)
 grg = pygrgl.load_mutable_grg(grg_path)

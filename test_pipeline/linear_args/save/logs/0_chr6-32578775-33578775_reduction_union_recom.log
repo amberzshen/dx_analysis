@@ -1,3 +1,0 @@
-2025-04-08 18:17:46,269 - linear_dag.core.partition_merge - INFO - [Memory: 73.32 MB] - Loading genotypes, forward and backward graphs, and sample indices
-2025-04-08 18:19:16,424 - linear_dag.core.partition_merge - INFO - [Memory: 73.27 MB] - Loading genotypes, forward and backward graphs, and sample indices
-2025-04-08 18:20:39,031 - linear_dag.core.partition_merge - INFO - [Memory: 73.00 MB] - Loading genotypes, forward and backward graphs, and sample indices
