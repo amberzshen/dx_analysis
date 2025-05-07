@@ -4,8 +4,8 @@ import time
 
 grg_path = 'ukb20279_c11_b0_v1_250129_whitelist.grg'
 t1 = time.time()
-# grg = pygrgl.load_immutable_grg(grg_path)
-grg = pygrgl.load_mutable_grg(grg_path)
+grg = pygrgl.load_immutable_grg(grg_path) # immutable is faster
+# grg = pygrgl.load_mutable_grg(grg_path)
 t2 = time.time()
 y = np.random.normal(0, 10, grg.num_samples)
 t3 = time.time()

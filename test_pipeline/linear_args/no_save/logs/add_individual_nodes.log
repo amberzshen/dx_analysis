@@ -1,0 +1,6 @@
+2025-04-30 14:25:27,898 - linear_dag.core.partition_merge - INFO - [Memory: 105.84 MB] - Loading linear ARG
+2025-04-30 14:25:28,010 - linear_dag.core.partition_merge - INFO - [Memory: 144.84 MB] - Linear ARG loaded in 0.112 seconds
+2025-04-30 14:25:28,011 - linear_dag.core.partition_merge - INFO - [Memory: 144.84 MB] - Adding individual nodes to the linear ARG
+2025-04-30 14:25:38,674 - linear_dag.core.partition_merge - INFO - [Memory: 384.34 MB] - Individual nodes added in 10.663 seconds
+2025-04-30 14:25:38,674 - linear_dag.core.partition_merge - INFO - [Memory: 384.34 MB] - Saving linear ARG
+2025-04-30 14:25:38,868 - linear_dag.core.partition_merge - INFO - [Memory: 395.08 MB] - Computing linear ARG stats

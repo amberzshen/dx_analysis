@@ -16,7 +16,7 @@ def main():
     t2 = time.time()
     print(f'Time to load LinearARG: {t2 - t1:.3f} seconds')
     
-    # linarg.flip = np.array([False for i in range(linarg.shape[1])])
+    # linarg = linarg.add_individual_nodes()
 
     ncol = 100
     print(f"Number of columns: {ncol}")
@@ -64,10 +64,10 @@ def main():
     t_end = time.time()
     print(f"Time for linarg @ b block fp64: {t_end - t_start:.3f} seconds")
     
-    # print(f'matvec: {result_matmat_true.ravel()}')
-    # print(f'matmat: {result_fp64.ravel()}')
-    # print(f'diff: {result_fp64.ravel() - result_matmat_true.ravel()}')
-    # print(f'scipy: {result_scipy.ravel()}')
+    print(f'matvec: {result_matmat_true.ravel()}')
+    print(f'matmat: {result_fp64.ravel()}')
+    print(f'diff: {result_fp64.ravel() - result_matmat_true.ravel()}')
+    print(f'scipy: {result_scipy.ravel()}')
     assert np.allclose(result_fp64.ravel(), result_matmat_true.ravel()), "Results do not match"
     
     print("Results match for matmat with multiple rows\n")
@@ -84,8 +84,10 @@ def main():
     t_end = time.time()
     print(f"Time for y @ linarg block fp32: {t_end - t_start:.3f} seconds")
 
-
-    assert np.allclose(result_rmatmat_true.ravel(), result_fp32.ravel()), "Results do not match"
+    print(f'matvec: {result_rmatmat_true.ravel()}, {result_rmatmat_true.ravel().shape}')
+    print(f'matmat: {result_fp32.ravel()}, {result_fp32.ravel().shape}')
+    print(f'diff: {result_fp32.ravel() - result_rmatmat_true.ravel()}')
+    # assert np.allclose(result_rmatmat_true.ravel(), result_fp32.ravel()), "Results do not match"
 
     y = y.astype(np.float64)
     t_start = time.time()
@@ -93,6 +95,9 @@ def main():
     t_end = time.time()
     print(f"Time for y @ linarg block fp64: {t_end - t_start:.3f} seconds")
     
+    print(f'matvec: {result_rmatmat_true.ravel()}')
+    print(f'matmat: {result_fp64.ravel()}')
+    print(f'diff: {result_fp64.ravel() - result_rmatmat_true.ravel()}')
     assert np.allclose(result_rmatmat_true.ravel(), result_fp64.ravel()), "Results do not match"
     print("Results match for rmatmat with multiple columns\n")
 

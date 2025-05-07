@@ -1,0 +1,2 @@
+genotypes_nnz brick_graph_nnz linarg_nnz
+18447449 2639621 299172

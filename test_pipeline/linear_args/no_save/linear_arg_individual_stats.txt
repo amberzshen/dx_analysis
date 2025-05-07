@@ -1,0 +1,2 @@
+n m genotypes_nnz linarg_nnz linarg_nnz_ratio correct_allele_counts correct_carrier_counts
+6404 35306 22391895 1372846 16.311 True True
