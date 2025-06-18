@@ -1,8 +1,8 @@
-2025-04-30 14:14:16,155 - linear_dag.core.partition_merge - INFO - [Memory: 105.43 MB] - Loading genotypes, forward and backward graphs, and sample indices
-2025-04-30 14:14:17,554 - linear_dag.core.partition_merge - INFO - [Memory: 603.11 MB] - Loaded in 1.399 seconds
-2025-04-30 14:14:17,554 - linear_dag.core.partition_merge - INFO - [Memory: 603.11 MB] - Combining nodes and computing reduction union
-2025-04-30 14:14:18,151 - linear_dag.core.partition_merge - INFO - [Memory: 828.40 MB] - Combined nodes and computed reduction union in 0.596 seconds
-2025-04-30 14:14:18,151 - linear_dag.core.partition_merge - INFO - [Memory: 828.40 MB] - Finding recombinations
-2025-04-30 14:14:23,873 - linear_dag.core.partition_merge - INFO - [Memory: 1838.21 MB] - Found recombinations in 5.722 seconds
-2025-04-30 14:14:23,995 - linear_dag.core.partition_merge - INFO - [Memory: 1846.28 MB] - Saving brick graph
-2025-04-30 14:14:24,006 - linear_dag.core.partition_merge - INFO - [Memory: 1847.58 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978
+2025-05-08 11:41:17,008 - linear_dag.core.partition_merge - INFO - [Memory: 105.41 MB] - Loading genotypes, forward and backward graphs, and sample indices
+2025-05-08 11:41:18,470 - linear_dag.core.partition_merge - INFO - [Memory: 603.47 MB] - Loaded in 1.461 seconds
+2025-05-08 11:41:18,470 - linear_dag.core.partition_merge - INFO - [Memory: 603.47 MB] - Combining nodes and computing reduction union
+2025-05-08 11:41:19,104 - linear_dag.core.partition_merge - INFO - [Memory: 948.52 MB] - Combined nodes and computed reduction union in 0.634 seconds
+2025-05-08 11:41:19,104 - linear_dag.core.partition_merge - INFO - [Memory: 948.52 MB] - Finding recombinations
+2025-05-08 11:41:24,954 - linear_dag.core.partition_merge - INFO - [Memory: 1727.83 MB] - Found recombinations in 5.849 seconds
+2025-05-08 11:41:25,079 - linear_dag.core.partition_merge - INFO - [Memory: 1744.23 MB] - Saving brick graph
+2025-05-08 11:41:25,091 - linear_dag.core.partition_merge - INFO - [Memory: 1747.87 MB] - Stats - n: 6404, m: 4059, geno_nnz: 7416185.0, brickgraph_nnz: 99404, nnz_ratio: 74.60650476841978

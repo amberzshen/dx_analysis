@@ -1,0 +1,19 @@
+#!/bin/bash
+chrom=$1
+
+# download python 3.10
+sudo apt update
+sudo apt install libffi-dev
+curl https://pyenv.run | bash
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+pyenv install 3.10.13
+pyenv global 3.10.13
+
+pip install polars
+pip install memory_profiler
+pip install git+https://github.com/quattro/linear-dag.git
+
+python linarg_gwas_100_phenotypes.py $chrom
+

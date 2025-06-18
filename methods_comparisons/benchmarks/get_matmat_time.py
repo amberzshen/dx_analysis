@@ -61,37 +61,26 @@ def time_linarg_matmat(linarg_path, n_vectors):
     dp_time, dp_mem = benchmark(lambda: y @ linarg, repeat=5)
     return load_time, load_mem, dp_time, dp_mem
 
-
-def time_scipy_matmat(genotypes_path, n_vectors):
-    load_time, load_mem = benchmark(load_npz, genotypes_path, repeat=5)
-    genotypes = load_npz(genotypes_path)
-    y = np.random.normal(size=(n_vectors, genotypes.shape[0]))
-    dp_time, dp_mem = benchmark(lambda: y @ genotypes, repeat=5)
-    return load_time, load_mem, dp_time, dp_mem
-
     
 if __name__ == "__main__":
     
     results = []
     
-    for n_vectors in [1, 2, 10, 100, 1000]:
-        for chrom in [21]:
+    for n_vectors in [1, 2, 10, 20, 40, 60, 80, 100]:
+        for chrom in [1, 11, 21]:
+        
+            print(f'chr{chrom}, n_vectors: {n_vectors}')
         
             grg_path = f'/mnt/project/methods_comparisons/grg/ukb20279_c{chrom}_b0_v1_250129_whitelist.grg'
             load_time, load_mem, dp_time, dp_mem = time_grg_matmat(grg_path, n_vectors)
-            results.append((chrom, 'n_vectors', 'grg', load_time, load_mem, dp_time, dp_mem))
+            results.append((chrom, 'n_vectcors', 'grg', load_time, load_mem, dp_time, dp_mem))
             
             linarg_dir = f'/mnt/project/linear_args/ukb20279/chr{chrom}/'
             for partition in os.listdir(linarg_dir):
                 linarg_path = f'{linarg_dir}{partition}/linear_arg.h5'
                 load_time, load_mem, dp_time, dp_mem = time_linarg_matmat(linarg_path, n_vectors)
                 results.append((chrom, 'n_vectors', f'linarg_{partition}', load_time, load_mem, dp_time, dp_mem))
-                
-            for large_partition in os.listdir(linarg_dir):
-                for file in os.listdir(f'{linarg_dir}/{large_partition}/genotype_matrices/'):
-                    genotypes_path = f'{linarg_dir}/{large_partition}/genotype_matrices/{file}'
-                    load_time, load_mem, dp_time, dp_mem = time_scipy_matmat(genotypes_path, n_vectors)
-                    results.append((chrom, 'n_vectors', f'genotypes_{file}', load_time, load_mem, dp_time, dp_mem))
+    
         
     df = pl.DataFrame(
         results,
@@ -99,4 +88,4 @@ if __name__ == "__main__":
     )
     
     os.makedirs("amber/methods_comparisons/results/", exist_ok=True)
-    df.write_csv("amber/methods_comparisons/results/matmat_test.csv")
+    df.write_csv("amber/methods_comparisons/results/matmat_times.csv")

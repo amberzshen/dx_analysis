@@ -47,10 +47,10 @@
 @@@@@                @@@@   ██║  ██╗╚██████╔╝██████╔╝██║  ██║██║ ╚═╝ ██║██║  ██║   @@@@
 @@@@@                @@@@   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   @@@@
 @@@@@                @@@@                                                          @@@@
-                                         v0.1.dev238+g51825e8.d20250430                                         
+                                         v0.1.dev239+gb2789bc.d20250508                                         
 kodama add-individual-nodes
         --linarg_dir /Users/ambershen/Desktop/linARG/dx_analysis/test_pipeline/linear_args/no_save/
 
 Starting log...
-[2025-04-30 14:25:27 - INFO] Starting main process
-[2025-04-30 14:25:41 - INFO] Done!
+[2025-05-08 11:43:10 - INFO] Starting main process
+[2025-05-08 11:43:23 - INFO] Done!

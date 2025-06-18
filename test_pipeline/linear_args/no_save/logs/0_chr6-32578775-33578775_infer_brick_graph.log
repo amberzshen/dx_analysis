@@ -1,8 +1,8 @@
-2025-04-30 14:14:42,010 - linear_dag.core.partition_merge - INFO - [Memory: 105.42 MB] - Loading genotype matrix
-2025-04-30 14:14:42,351 - linear_dag.core.partition_merge - INFO - [Memory: 245.68 MB] - Genotype matrix loaded in 0.341 seconds
-2025-04-30 14:14:42,351 - linear_dag.core.partition_merge - INFO - [Memory: 245.68 MB] - Inferring brick graph
-2025-04-30 14:15:34,400 - linear_dag.core.partition_merge - INFO - [Memory: 1975.89 MB] - Brick graph inferred in 52.049 seconds
-2025-04-30 14:15:34,400 - linear_dag.core.partition_merge - INFO - [Memory: 1975.89 MB] - Finding recombinations
-2025-04-30 14:15:51,568 - linear_dag.core.partition_merge - INFO - [Memory: 3289.10 MB] - Recombinations found in 17.168 seconds
-2025-04-30 14:15:52,042 - linear_dag.core.partition_merge - INFO - [Memory: 3345.25 MB] - Saving brick graph
-2025-04-30 14:15:52,084 - linear_dag.core.partition_merge - INFO - [Memory: 3349.13 MB] - Stats - n: 6404, m: 35306, geno_nnz: 22391895.0, brickgraph_nnz: 512699, nnz_ratio: 43.67454393318497
+2025-05-08 11:41:42,413 - linear_dag.core.partition_merge - INFO - [Memory: 105.41 MB] - Loading genotype matrix
+2025-05-08 11:41:42,754 - linear_dag.core.partition_merge - INFO - [Memory: 245.61 MB] - Genotype matrix loaded in 0.341 seconds
+2025-05-08 11:41:42,754 - linear_dag.core.partition_merge - INFO - [Memory: 245.61 MB] - Inferring brick graph
+2025-05-08 11:42:37,091 - linear_dag.core.partition_merge - INFO - [Memory: 2162.22 MB] - Brick graph inferred in 54.337 seconds
+2025-05-08 11:42:37,091 - linear_dag.core.partition_merge - INFO - [Memory: 2162.22 MB] - Finding recombinations
+2025-05-08 11:42:55,113 - linear_dag.core.partition_merge - INFO - [Memory: 3284.57 MB] - Recombinations found in 18.022 seconds
+2025-05-08 11:42:55,569 - linear_dag.core.partition_merge - INFO - [Memory: 3339.91 MB] - Saving brick graph
+2025-05-08 11:42:55,611 - linear_dag.core.partition_merge - INFO - [Memory: 3344.94 MB] - Stats - n: 6404, m: 35306, geno_nnz: 22391895.0, brickgraph_nnz: 512699, nnz_ratio: 43.67454393318497

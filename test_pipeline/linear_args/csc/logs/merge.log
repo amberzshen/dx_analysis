@@ -1,10 +1,10 @@
-2025-04-30 14:14:25,004 - linear_dag.core.partition_merge - INFO - [Memory: 107.17 MB] - Merging brick graphs
-2025-04-30 14:14:25,261 - linear_dag.core.partition_merge - INFO - [Memory: 137.36 MB] - Brick graphs merged in 0.256 seconds
-2025-04-30 14:14:25,261 - linear_dag.core.partition_merge - INFO - [Memory: 137.36 MB] - Finding recombinations
-2025-04-30 14:14:25,407 - linear_dag.core.partition_merge - INFO - [Memory: 172.89 MB] - Recombinations found in 0.145 seconds
-2025-04-30 14:14:25,407 - linear_dag.core.partition_merge - INFO - [Memory: 172.89 MB] - Linearizing brick graph
-2025-04-30 14:14:27,548 - linear_dag.core.partition_merge - INFO - [Memory: 184.20 MB] - Linearized brick graph in 2.141 seconds
-2025-04-30 14:14:27,548 - linear_dag.core.partition_merge - INFO - [Memory: 184.20 MB] - Reading variant metadata and flip
-2025-04-30 14:14:27,558 - linear_dag.core.partition_merge - INFO - [Memory: 186.38 MB] - Triangularizing and computing nonunique indices
-2025-04-30 14:14:27,835 - linear_dag.core.partition_merge - INFO - [Memory: 192.47 MB] - Saving linear ARG
-2025-04-30 14:14:27,857 - linear_dag.core.partition_merge - INFO - [Memory: 194.82 MB] - Computing linear ARG stats
+2025-05-08 11:41:26,020 - linear_dag.core.partition_merge - INFO - [Memory: 105.39 MB] - Merging brick graphs
+2025-05-08 11:41:26,265 - linear_dag.core.partition_merge - INFO - [Memory: 135.32 MB] - Brick graphs merged in 0.244 seconds
+2025-05-08 11:41:26,265 - linear_dag.core.partition_merge - INFO - [Memory: 135.32 MB] - Finding recombinations
+2025-05-08 11:41:26,393 - linear_dag.core.partition_merge - INFO - [Memory: 167.45 MB] - Recombinations found in 0.127 seconds
+2025-05-08 11:41:26,393 - linear_dag.core.partition_merge - INFO - [Memory: 167.45 MB] - Linearizing brick graph
+2025-05-08 11:41:28,331 - linear_dag.core.partition_merge - INFO - [Memory: 180.73 MB] - Linearized brick graph in 1.938 seconds
+2025-05-08 11:41:28,331 - linear_dag.core.partition_merge - INFO - [Memory: 180.73 MB] - Reading variant metadata and flip
+2025-05-08 11:41:28,340 - linear_dag.core.partition_merge - INFO - [Memory: 183.04 MB] - Triangularizing and computing nonunique indices
+2025-05-08 11:41:28,608 - linear_dag.core.partition_merge - INFO - [Memory: 188.25 MB] - Saving linear ARG
+2025-05-08 11:41:28,628 - linear_dag.core.partition_merge - INFO - [Memory: 189.07 MB] - Computing linear ARG stats

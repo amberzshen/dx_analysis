@@ -17,7 +17,7 @@ shift
 COMMAND=("$@")
 
 # Number of runs (change if needed)
-RUNS=10
+RUNS=1
 
 # Write CSV header
 echo "run,wall_time_seconds,peak_memory_MB" > "$OUTPUT_FILE"

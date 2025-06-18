@@ -28,6 +28,8 @@ def get_ukb_linarg_size(chroms):
         order = ind_arr.argsort()
         files = np.array(files)[order].tolist() # sort files by index
         for f in files:
+            if not os.path.exists(f'{linarg_dir}/{f}/linear_arg.h5'):
+                continue
             linarg = ld.LinearARG.read(f'{linarg_dir}/{f}/linear_arg.h5')
             size_in_memory.append(get_size_of_linarg(linarg))
     return np.sum(size_in_memory) / 10**9
@@ -38,6 +40,8 @@ def get_linarg_disk_size(chroms):
     for chrom in chroms:
         linarg_dir = f'/mnt/project/linear_args/ukb20279/chr{chrom}/'
         for partition in os.listdir(linarg_dir):
+            if not os.path.exists(f'{linarg_dir}{partition}/linear_arg.h5'):
+                continue
             with h5py.File(f'{linarg_dir}{partition}/linear_arg.h5', 'r') as f:
                 dataset_names = ['indptr', 'indices', 'data', 'variant_indices', 'flip'] 
                 for name in dataset_names:
@@ -51,6 +55,8 @@ def get_variant_metadata_disk_size(chroms):
     for chrom in chroms:
         linarg_dir = f'/mnt/project/linear_args/ukb20279/chr{chrom}/'
         for partition in os.listdir(linarg_dir):
+            if not os.path.exists(f'{linarg_dir}{partition}/linear_arg.h5'):
+                continue
             with h5py.File(f'{linarg_dir}{partition}/linear_arg.h5', 'r') as f:
                 dataset_names = ["CHROM", "POS", "ID", "REF", "ALT"]
                 for name in dataset_names:
@@ -73,6 +79,8 @@ def get_nnz_ratio(chroms):
     linarg_path = '/mnt/project/linear_args/ukb20279'
     for chrom in chroms:
         for p in os.listdir(f'{linarg_path}/chr{chrom}'):
+            if not os.path.exists(f'{linarg_path}/chr{chrom}/{p}/linear_arg_stats.txt'):
+                continue
             tmp = pd.read_csv(f'{linarg_path}/chr{chrom}/{p}/linear_arg_stats.txt', delim_whitespace=True, header=0)
             linarg_nnz += tmp.linarg_nnz
             genotypes_nnz += tmp.genotypes_nnz
@@ -82,7 +90,7 @@ def get_nnz_ratio(chroms):
 
 if __name__ == "__main__":
     
-    chroms = np.arange(1, 23)
+    chroms = [str(i) for i in range(1, 23)] + ['X']
     
     size_in_memory = get_ukb_linarg_size(chroms)
     nnz_ratio, n_variants = get_nnz_ratio(chroms)
@@ -99,7 +107,7 @@ if __name__ == "__main__":
         "vcf_disk_size": vcf_disk_size,
     }
 
-    with open("ukb20279_linarg_stats.txt", "w") as f:
+    with open("ukb20279_linarg_stats_chrX.txt", "w") as f:
         for name, value in results.items():
             f.write(f"{name}: {value}\n")
         

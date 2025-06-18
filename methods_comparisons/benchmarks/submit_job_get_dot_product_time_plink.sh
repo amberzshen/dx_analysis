@@ -4,8 +4,9 @@ dx run app-swiss-army-knife \
     --destination "/amber/methods_comparisons/results/" \
     --instance-type "mem3_ssd1_v2_x8" \
     --priority high \
-    --name "plink_dp_21" \
+    --name "plink_dp_21_short" \
     --brief \
+    --ignore-reuse \
     -y
 
 dx run app-swiss-army-knife \
@@ -14,8 +15,9 @@ dx run app-swiss-army-knife \
     --destination "/amber/methods_comparisons/results/" \
     --instance-type "mem3_ssd1_v2_x8" \
     --priority high \
-    --name "plink_dp_11" \
+    --name "plink_dp_11_short" \
     --brief \
+    --ignore-reuse \
     -y
 
 dx run app-swiss-army-knife \
@@ -24,6 +26,7 @@ dx run app-swiss-army-knife \
     --destination "/amber/methods_comparisons/results/" \
     --instance-type "mem3_ssd1_v2_x8" \
     --priority high \
-    --name "plink_dp_1" \
+    --name "plink_dp_1_short" \
     --brief \
+    --ignore-reuse \
     -y

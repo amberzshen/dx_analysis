@@ -1,0 +1,11 @@
+dx run app-swiss-army-knife \
+    -iin="/amber/scripts/linarg_gwas_nocovar.py" \
+    -iin="/amber/scripts/run_linarg_gwas_nocovar.sh" \
+    -icmd="bash run_linarg_gwas_nocovar.sh" \
+    --destination "/amber/methods_comparisons/results/" \
+    --instance-type "mem3_ssd1_v2_x4" \
+    --priority high \
+    --name "linarg_gwas_21_nocovar" \
+    --brief \
+    --ignore-reuse \
+    -y

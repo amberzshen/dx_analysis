@@ -1,0 +1,11 @@
+dx run app-swiss-army-knife \
+    -iin="/amber/scripts/test_no_hwe.py" \
+    -iin="/amber/scripts/run_test_no_hwe.sh" \
+    -icmd="bash run_test_no_hwe.sh" \
+    --destination "/amber/methods_comparisons/results/" \
+    --instance-type "mem3_ssd1_v2_x4" \
+    --priority high \
+    --name "linarg_gwas_no_hwe_21" \
+    --brief \
+    --ignore-reuse \
+    -y

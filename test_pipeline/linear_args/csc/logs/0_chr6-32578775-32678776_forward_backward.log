@@ -1,4 +1,4 @@
-2025-04-30 14:13:55,687 - linear_dag.core.partition_merge - INFO - [Memory: 105.45 MB] - Loading genotype matrix
-2025-04-30 14:13:55,805 - linear_dag.core.partition_merge - INFO - [Memory: 155.93 MB] - Genotype matrix loaded in 0.117 seconds
-2025-04-30 14:13:55,805 - linear_dag.core.partition_merge - INFO - [Memory: 155.93 MB] - Running forward and backward brick graph algorithms
-2025-04-30 14:14:15,573 - linear_dag.core.partition_merge - INFO - [Memory: 232.72 MB] - Forward and backward brick graph algorithms completed in 19.768 seconds
+2025-05-08 11:40:52,231 - linear_dag.core.partition_merge - INFO - [Memory: 105.41 MB] - Loading genotype matrix
+2025-05-08 11:40:52,348 - linear_dag.core.partition_merge - INFO - [Memory: 155.89 MB] - Genotype matrix loaded in 0.117 seconds
+2025-05-08 11:40:52,348 - linear_dag.core.partition_merge - INFO - [Memory: 155.89 MB] - Running forward and backward brick graph algorithms
+2025-05-08 11:41:16,424 - linear_dag.core.partition_merge - INFO - [Memory: 234.83 MB] - Forward and backward brick graph algorithms completed in 24.075 seconds

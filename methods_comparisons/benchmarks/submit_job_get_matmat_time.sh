@@ -3,7 +3,7 @@ dx run app-swiss-army-knife \
     -iin="/amber/scripts/run_get_matmat_time.sh" \
     -icmd="bash run_get_matmat_time.sh" \
     --destination "/" \
-    --instance-type "mem3_ssd1_v2_x16" \
+    --instance-type "mem3_ssd1_v2_x32" \
     --priority high \
     --name "matmat_time" \
     --brief \

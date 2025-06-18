@@ -1,0 +1,11 @@
+dx run app-swiss-army-knife \
+    -iin="/amber/scripts/run_get_sex.sh" \
+    -iin="/amber/scripts/get_sex.py" \
+    -icmd="bash run_get_sex.sh" \
+    --destination "sample_metadata/ukb20279/" \
+    --instance-type "mem3_ssd1_v2_x2" \
+    --priority high \
+    --name "get_sex" \
+    --brief \
+    --ignore-reuse \
+    -y
